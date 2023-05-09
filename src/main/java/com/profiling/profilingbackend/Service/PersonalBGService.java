@@ -2,10 +2,8 @@ package com.profiling.profilingbackend.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.profiling.profilingbackend.Model.PersonalBG;
 
 @Service
@@ -21,4 +19,5 @@ public interface PersonalBGService {
     ResponseEntity <String> updatePersonalBGByID(String id, PersonalBG newPersonalBG);
 
     // delete personal bg by id
+    ResponseEntity <String> deletePersonalBGByID(String id);
 }
