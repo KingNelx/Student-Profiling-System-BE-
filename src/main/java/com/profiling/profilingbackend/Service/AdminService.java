@@ -26,5 +26,7 @@ public interface AdminService {
     // update admin info by id
     ResponseEntity <String> updateAdminInfoByID(String id, Admin newAdminInfo);
 
+    // remove admins data by id
+    ResponseEntity <String> removeAdminsDataByID(String id);
 
 }

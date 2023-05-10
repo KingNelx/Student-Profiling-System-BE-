@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import com.profiling.profilingbackend.Model.Admin;
@@ -45,5 +46,10 @@ public class AdminController {
     @PutMapping("/updateAdminsDataByID/{id}")
     public ResponseEntity <String> updateAdminInfoByID(@PathVariable String id, @RequestBody Admin updateAdminsData){
         return adminService.updateAdminInfoByID(id, updateAdminsData);
+    }
+
+    @DeleteMapping ("/deleteAdminsDataByID/{id}")
+    public ResponseEntity <String> deleteAdminsDataByID(@PathVariable String id){
+        return adminService.removeAdminsDataByID(id);
     }
 }

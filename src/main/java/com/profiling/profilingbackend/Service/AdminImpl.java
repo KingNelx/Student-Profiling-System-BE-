@@ -72,4 +72,13 @@ public class AdminImpl implements AdminService {
         return ResponseEntity.ok(" ADMINS DATA UPDATED ");
     }
 
+    @Override
+    public ResponseEntity<String> removeAdminsDataByID(@PathVariable String id) {
+        if (!adminRepo.findById(id).isPresent()) {
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+        }
+        adminRepo.deleteById(id);
+        return ResponseEntity.ok(" ADMIN with id: " + id + " got DELETED");
+    }
+
 }
