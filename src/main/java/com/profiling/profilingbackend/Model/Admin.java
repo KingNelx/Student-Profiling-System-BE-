@@ -21,6 +21,7 @@ public class Admin {
     private @Getter @Setter String id;
     private @Getter @Setter String firstName;
     private @Getter @Setter String lastName;
+    private @Getter @Setter String email;
     private @Getter @Setter String userName;
     private @Getter @Setter String password;
 }
