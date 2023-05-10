@@ -21,7 +21,7 @@ import jakarta.persistence.Id;
 public class OtherBG {
     
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private @Getter @Setter String id;
     @ElementCollection
     private @Getter @Setter List <String> healthConditions;
