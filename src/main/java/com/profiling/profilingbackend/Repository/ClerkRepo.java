@@ -1,5 +1,9 @@
 package com.profiling.profilingbackend.Repository;
 
-public interface ClerkRepo {
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.profiling.profilingbackend.Model.Clerk;
+
+public interface ClerkRepo extends MongoRepository <Clerk, String>{
     
 }
