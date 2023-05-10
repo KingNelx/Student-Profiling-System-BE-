@@ -23,5 +23,8 @@ public interface AdminService {
     // get admin by id
     Optional <Admin> getAdminInfoByID(String id);
 
+    // update admin info by id
+    ResponseEntity <String> updateAdminInfoByID(String id, Admin newAdminInfo);
+
 
 }
