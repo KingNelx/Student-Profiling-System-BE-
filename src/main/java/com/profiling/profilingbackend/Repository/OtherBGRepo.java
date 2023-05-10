@@ -1,5 +1,9 @@
 package com.profiling.profilingbackend.Repository;
 
-public interface OtherBGRepo {
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.profiling.profilingbackend.Model.OtherBG;
+
+public interface OtherBGRepo extends MongoRepository <OtherBG, String> {
     
 }
