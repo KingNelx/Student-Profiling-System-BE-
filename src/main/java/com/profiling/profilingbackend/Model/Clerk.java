@@ -5,13 +5,11 @@ import lombok.Setter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.Id;
-
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Entity;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,7 +18,7 @@ import jakarta.persistence.Entity;
 public class Clerk {
     
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private @Getter @Setter String firstName;
     private @Getter @Setter String lastName;
     private @Getter @Setter String userName;
