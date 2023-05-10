@@ -9,4 +9,6 @@ import com.profiling.profilingbackend.Model.Admin;
 public interface AdminRepo extends MongoRepository <Admin, String> {
     Optional <Admin> findByEmail(String email);
     Optional <Admin> findByUserName(String userName);
+    Admin findByUserNameAndPassword(String userName, String password);
+    
 }

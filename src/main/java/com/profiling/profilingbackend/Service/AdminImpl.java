@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 
 import com.profiling.profilingbackend.Model.Admin;
@@ -20,7 +22,7 @@ public class AdminImpl implements AdminService {
 
     @Override
     public ResponseEntity<String> registerAdminAccount(@RequestBody Admin newAdmin) {
-        
+
         Optional<Admin> existingEmailAdminInfo = adminRepo.findByEmail(newAdmin.getEmail());
         Optional<Admin> existingUserNameAdminInfo = adminRepo.findByUserName(newAdmin.getUserName());
 
@@ -32,10 +34,28 @@ public class AdminImpl implements AdminService {
     }
 
     @Override
+    public ResponseEntity<String> logInAdmin(@RequestParam String userName, @RequestParam String password) {
+        Admin adminInfo = adminRepo.findByUserNameAndPassword(userName, password);
+        if (adminInfo == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Username or Password");
+        }
+        return ResponseEntity.ok("Login Successful! ");
+    }
+
+    @Override
     public List<Admin> getAllAdminAccount() {
         if (adminRepo.findAll().isEmpty()) {
             throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
         }
         return adminRepo.findAll();
     }
+
+    @Override
+    public  Optional <Admin> getAdminInfoByID(@PathVariable String id){
+        if(adminRepo.findById(id).isPresent()){
+            return adminRepo.findById(id);
+        }
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+    }
+
 }

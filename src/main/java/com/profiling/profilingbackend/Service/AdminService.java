@@ -14,6 +14,14 @@ public interface AdminService {
     // register admin account
     ResponseEntity <String> registerAdminAccount(Admin registerAdmin);
 
+    // log in admin account
+    ResponseEntity <String> logInAdmin(String userName, String password);
+
     // get all admin acoounts
     List <Admin> getAllAdminAccount();
+
+    // get admin by id
+    Optional <Admin> getAdminInfoByID(String id);
+
+
 }
