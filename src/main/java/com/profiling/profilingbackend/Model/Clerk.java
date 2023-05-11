@@ -19,6 +19,7 @@ public class Clerk {
     
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
+    private @Getter @Setter String id;
     private @Getter @Setter String firstName;
     private @Getter @Setter String lastName;
     private @Getter @Setter String userName;
