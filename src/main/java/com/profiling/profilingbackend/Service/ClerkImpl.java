@@ -26,6 +26,7 @@ public class ClerkImpl implements ClerkService {
         if (existingEmailInfo.isPresent() && existingUserNameInfo.isPresent()) {
             return ResponseEntity.ok(" CLERK EMAIL AND USERNAME ALREADY EXIST ");
         }
+        clerkRepo.save(newClerk);
         return ResponseEntity.ok(" CLERK ACCOUNT CREATED ");
     }
 
