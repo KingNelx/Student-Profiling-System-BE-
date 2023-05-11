@@ -1,11 +1,14 @@
 package com.profiling.profilingbackend.Service;
 
 import java.util.Optional;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.client.HttpClientErrorException;
+
 import com.profiling.profilingbackend.Model.Clerk;
 import com.profiling.profilingbackend.Repository.ClerkRepo;
 
@@ -24,5 +27,13 @@ public class ClerkImpl implements ClerkService {
             return ResponseEntity.ok(" CLERK EMAIL AND USERNAME ALREADY EXIST ");
         }
         return ResponseEntity.ok(" CLERK ACCOUNT CREATED ");
+    }
+
+    @Override
+    public  List <Clerk> getAllClerksAccount(){
+        if(clerkRepo.findAll().isEmpty()){
+            throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+        }
+        return clerkRepo.findAll();
     }
 }
