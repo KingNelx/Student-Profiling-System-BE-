@@ -30,7 +30,7 @@ public class AdminImpl implements AdminService {
             return ResponseEntity.ok(" ADMIN EMAIL AND USERNAME ALREDY EXIST ");
         }
         adminRepo.save(newAdmin);
-        return ResponseEntity.ok(" ADMIN ACCOUNT REGISTED ");
+        return ResponseEntity.ok(" ADMIN ACCOUNT CREATED ");
     }
 
     @Override
