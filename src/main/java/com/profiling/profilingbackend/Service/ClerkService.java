@@ -17,5 +17,8 @@ public interface ClerkService {
 
     // log in clerk
     ResponseEntity <String> logInClerk(String userName, String password);
+    
+    // select clerk by id
+    Optional <Clerk> getClerkDataByID(String id);
 
 }

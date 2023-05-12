@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
-
 import com.profiling.profilingbackend.Model.Clerk;
 import com.profiling.profilingbackend.Repository.ClerkRepo;
 
@@ -47,5 +47,13 @@ public class ClerkImpl implements ClerkService {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(" INVALID USERNAME OR PASSWORD ");
         }
         return ResponseEntity.ok(" Login Successful! ");
+    }
+
+    @Override
+    public Optional <Clerk> getClerkByID(@PathVariable String id){
+        if(!clerkRepo.findById(id).isPresent()){
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+        }
+        return clerkRepo.findById(id);
     }
 }
