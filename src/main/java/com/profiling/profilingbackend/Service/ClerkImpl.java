@@ -50,10 +50,24 @@ public class ClerkImpl implements ClerkService {
     }
 
     @Override
-    public Optional <Clerk> getClerkDataByID(@PathVariable String id){
-        if(!clerkRepo.findById(id).isPresent()){
+    public Optional<Clerk> getClerkDataByID(@PathVariable String id) {
+        if (!clerkRepo.findById(id).isPresent()) {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
         return clerkRepo.findById(id);
+    }
+
+    @Override
+    public ResponseEntity<String> updateClerkInfoByID(@PathVariable String id, @RequestBody Clerk newClerk) {
+        Clerk existingClerkInfo = clerkRepo.findById(id)
+                .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+        existingClerkInfo.setFirstName(newClerk.getFirstName());
+        existingClerkInfo.setLastName(newClerk.getLastName());
+        existingClerkInfo.setUserName(newClerk.getUserName());
+        existingClerkInfo.setPassword(newClerk.getPassword());
+        existingClerkInfo.setEmail(newClerk.getEmail());
+        clerkRepo.save(existingClerkInfo);
+
+        return ResponseEntity.ok(" CLERK DATA WITH ID: " + id + " GOT UPDATED ");
     }
 }

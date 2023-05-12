@@ -21,4 +21,7 @@ public interface ClerkService {
     // select clerk by id
     Optional <Clerk> getClerkDataByID(String id);
 
+    // update clerk info by id
+    ResponseEntity <String> updateClerkInfoByID(String id, Clerk newClerk);
+
 }

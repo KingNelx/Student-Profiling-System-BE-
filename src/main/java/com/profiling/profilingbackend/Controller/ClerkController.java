@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,5 +41,10 @@ public class ClerkController {
     @GetMapping ("/getClerkDataByID/{id}")
     public Optional <Clerk> getClerkDataByID(@PathVariable String id){
         return clerkService.getClerkDataByID(id);
+    }
+
+    @PutMapping ("/updateClerkDataByID/{id}")
+    public ResponseEntity <String> updateClerkByID (@PathVariable String id, @RequestBody Clerk newClerk){
+        return clerkService.updateClerkInfoByID(id, newClerk);
     }
 }
