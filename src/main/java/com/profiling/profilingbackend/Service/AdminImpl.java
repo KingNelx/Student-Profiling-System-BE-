@@ -37,9 +37,9 @@ public class AdminImpl implements AdminService {
     public ResponseEntity<String> logInAdmin(@RequestParam String userName, @RequestParam String password) {
         Admin adminInfo = adminRepo.findByUserNameAndPassword(userName, password);
         if (adminInfo == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Username or Password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(" INVALID USERNAME OR PASSWORD ");
         }
-        return ResponseEntity.ok("Login Successful! ");
+        return ResponseEntity.ok(" Login Successful! ");
     }
 
     @Override

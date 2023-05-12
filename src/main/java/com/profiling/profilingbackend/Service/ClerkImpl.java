@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 
 import com.profiling.profilingbackend.Model.Clerk;
@@ -31,10 +32,20 @@ public class ClerkImpl implements ClerkService {
     }
 
     @Override
-    public  List <Clerk> getAllClerksAccount(){
-        if(clerkRepo.findAll().isEmpty()){
+    public List<Clerk> getAllClerksAccount() {
+        if (clerkRepo.findAll().isEmpty()) {
             throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
         }
         return clerkRepo.findAll();
+    }
+
+    @Override
+    public ResponseEntity<String> logInClerk(@RequestParam String userName, @RequestParam String password) {
+        Clerk clerkInfo = clerkRepo.findByUserNameAndPassword(userName, password);
+
+        if (clerkInfo == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(" INVALID USERNAME OR PASSWORD ");
+        }
+        return ResponseEntity.ok(" Login Successful! ");
     }
 }

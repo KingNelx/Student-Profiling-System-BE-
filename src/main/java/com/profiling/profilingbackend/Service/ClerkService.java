@@ -15,4 +15,7 @@ public interface ClerkService {
     // get all clerks account
     List <Clerk> getAllClerksAccount();
 
+    // log in clerk
+    ResponseEntity <String> logInClerk(String userName, String password);
+
 }
