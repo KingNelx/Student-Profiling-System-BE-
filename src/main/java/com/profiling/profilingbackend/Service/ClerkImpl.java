@@ -50,7 +50,7 @@ public class ClerkImpl implements ClerkService {
     }
 
     @Override
-    public Optional <Clerk> getClerkByID(@PathVariable String id){
+    public Optional <Clerk> getClerkDataByID(@PathVariable String id){
         if(!clerkRepo.findById(id).isPresent()){
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
