@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.profiling.profilingbackend.Model.Clerk;
@@ -28,5 +29,10 @@ public class ClerkController {
     @GetMapping ("/getAllClerks")
     public List <Clerk> getAllClerks(){
         return clerkService.getAllClerksAccount();
+    }
+
+    @GetMapping ("/logInClerk")
+    public ResponseEntity <String> logInClerk(@RequestParam String userName, @RequestParam String password){
+        return clerkService.logInClerk(userName, password);
     }
 }
