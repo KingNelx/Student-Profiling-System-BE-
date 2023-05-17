@@ -26,7 +26,7 @@ public class Student {
     private @Getter @Setter String password;
 
     @DBRef
-    private @Getter @Setter PersonalBG personalBG;
+    private @Getter @Setter PersonalBG personalBG;  
 
     @DBRef
     private @Getter @Setter EducationalBG educationalBG;
