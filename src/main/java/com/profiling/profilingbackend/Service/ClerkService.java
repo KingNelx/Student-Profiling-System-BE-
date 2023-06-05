@@ -9,7 +9,7 @@ public interface ClerkService {
 
     ResponseEntity <String> registerNewClerk(Clerk registerClerk);
     List <Clerk> getAllClerk();
-    Optional <Clerk> getClerkInfo();
+    Optional <Clerk> getClerkInfo(String id);
     ResponseEntity <String> updateClerkInfo(String id, Clerk newClerk);
     ResponseEntity <String> deleteClerkInfo(String id);
 
