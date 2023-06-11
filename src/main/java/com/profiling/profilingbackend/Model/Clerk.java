@@ -9,7 +9,7 @@ import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Entity
-@Document
+@Document (collection = "Clerk")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Clerk {
