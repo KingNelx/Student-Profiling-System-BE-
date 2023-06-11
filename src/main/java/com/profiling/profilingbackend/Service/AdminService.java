@@ -14,7 +14,4 @@ public interface AdminService {
     Optional <Admin> getAdminByID(String id);
     ResponseEntity <String> updateAdminData(String id, Admin updatedAdminData);
     ResponseEntity <String> deleteAdminData(String id);
-
-
-
 }

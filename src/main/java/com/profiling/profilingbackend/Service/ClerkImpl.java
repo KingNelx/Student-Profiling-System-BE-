@@ -22,7 +22,7 @@ public class ClerkImpl implements ClerkService {
     @Override
     public ResponseEntity<String> registerNewClerk(@RequestBody Clerk registerClerk) {
         clerkRepo.save(registerClerk);
-        return ResponseEntity.ok(" CLERK SUCCESSFULLY REGISTERED ");
+        return ResponseEntity.ok(" CLERK ACCOUNT CREATED ");
     }
 
     @Override
