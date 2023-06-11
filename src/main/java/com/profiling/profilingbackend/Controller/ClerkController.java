@@ -23,7 +23,7 @@ public class ClerkController {
     @Autowired
     private ClerkService clerkService;
 
-    @PostMapping("/registerClerk")
+    @PostMapping("/createClerkAccount")
     ResponseEntity <String> registerNewClerk(@RequestBody Clerk registerClerk){
         return clerkService.registerNewClerk(registerClerk);
     }
