@@ -43,14 +43,14 @@ public class AdminImpl implements AdminService {
 
     @Override
     public ResponseEntity <String> updateAdminData(@PathVariable String id, @RequestBody Admin newAdmin){
-        Admin existingAdminInfo = adminRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND) );
+        Admin existingAdminInfo = adminRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
         existingAdminInfo.setFirstName(newAdmin.getFirstName());
         existingAdminInfo.setLastName(newAdmin.getLastName());
         existingAdminInfo.setUserName(newAdmin.getUserName());
         existingAdminInfo.setEmail(newAdmin.getEmail());
         existingAdminInfo.setPassword(newAdmin.getPassword());
 
-        adminRepo.save(newAdmin);
+        adminRepo.save(existingAdminInfo);
 
         return ResponseEntity.ok(" ADMIN SUCCESSFULLY UPDATED ");
     }

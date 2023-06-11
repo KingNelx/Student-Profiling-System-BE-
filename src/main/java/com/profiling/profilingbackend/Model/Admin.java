@@ -1,13 +1,10 @@
 package com.profiling.profilingbackend.Model;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Entity;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Entity
@@ -17,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Admin {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private @Getter @Setter String id;
     @Column (nullable = false)
     private @Getter @Setter String firstName;

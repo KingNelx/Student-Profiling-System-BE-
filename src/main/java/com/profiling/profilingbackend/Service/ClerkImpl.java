@@ -49,7 +49,7 @@ public class ClerkImpl implements ClerkService {
         existingClerkInfo.setUserName(updateClerk.getUserName());
         existingClerkInfo.setEmail(updateClerk.getEmail());
         existingClerkInfo.setPassword(updateClerk.getPassword());
-        clerkRepo.save(updateClerk);
+        clerkRepo.save(existingClerkInfo);
         return ResponseEntity.ok(" CLERK UPDATED SUCCESSFULLY ");
     }
 

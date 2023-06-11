@@ -34,7 +34,7 @@ public class ClerkController {
     }
 
     @GetMapping("getClerk/{id}")
-    Optional <Clerk> getClerkInfo(String id){
+    Optional <Clerk> getClerkInfo(@PathVariable String id){
         return clerkService.getClerkInfo(id);
     }
 
@@ -44,7 +44,7 @@ public class ClerkController {
     }
 
     @DeleteMapping("/deleteClerk/{id}")
-    ResponseEntity <String> deleteClerkInfo(String id){
+    ResponseEntity <String> deleteClerkInfo(@PathVariable String id){
         return clerkService.deleteClerkInfo(id);
     }
 
