@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,12 @@ public class AdminImpl implements AdminService {
 
     @Override
     public ResponseEntity <String> registerNewAdmin(@RequestBody Admin newAdmin){
+        Optional <Admin> existingEmail = adminRepo.findByEmail(newAdmin.getEmail());
+        Optional <Admin> existingUserName = adminRepo.findByUsername(newAdmin.getUserName());
+
+        if(existingEmail.isPresent() && existingUserName.isPresent()){
+        throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED);
+        }
         adminRepo.save(newAdmin);
         return ResponseEntity.ok(" ADMIN ACCOUNT CREATED ");
     }
@@ -62,5 +69,16 @@ public class AdminImpl implements AdminService {
         }
         adminRepo.deleteById(id);
         return ResponseEntity.ok(" ADMIN DATA with id: " + id + " has been DELETED ");
+    }
+
+    @Override
+    public ResponseEntity <String> logInAdmin(@RequestParam String userName, @RequestParam String email, @RequestParam String password){
+        Admin existingAdminInfo = adminRepo.findByEmailAndUserNameAndPassword(userName, email, password);
+
+        if(existingAdminInfo == null){
+            throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED);
+        }
+        adminRepo.findAll();
+        return ResponseEntity.ok(" LOGIN SUCCESSFULLY ");
     }
 }

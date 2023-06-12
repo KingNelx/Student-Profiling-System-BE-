@@ -14,4 +14,6 @@ public interface AdminService {
     Optional <Admin> getAdminByID(String id);
     ResponseEntity <String> updateAdminData(String id, Admin updatedAdminData);
     ResponseEntity <String> deleteAdminData(String id);
+
+    ResponseEntity <String> logInAdmin(String userName, String email, String password);
 }
