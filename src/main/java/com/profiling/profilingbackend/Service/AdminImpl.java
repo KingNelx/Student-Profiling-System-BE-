@@ -23,10 +23,10 @@ public class AdminImpl implements AdminService {
     @Override
     public ResponseEntity <String> registerNewAdmin(@RequestBody Admin newAdmin){
         Optional <Admin> existingEmail = adminRepo.findByEmail(newAdmin.getEmail());
-        Optional <Admin> existingUserName = adminRepo.findByUsername(newAdmin.getUserName());
+        Optional <Admin> existingUserName = adminRepo.findByUserName(newAdmin.getUserName());
 
         if(existingEmail.isPresent() && existingUserName.isPresent()){
-        throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED);
+        throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, " ADMIN DETAILS ALREADY REGISTERED ");
         }
         adminRepo.save(newAdmin);
         return ResponseEntity.ok(" ADMIN ACCOUNT CREATED ");
@@ -73,10 +73,10 @@ public class AdminImpl implements AdminService {
 
     @Override
     public ResponseEntity <String> logInAdmin(@RequestParam String userName, @RequestParam String email, @RequestParam String password){
-        Admin existingAdminInfo = adminRepo.findByEmailAndUserNameAndPassword(userName, email, password);
+        Admin existingAdminInfo = adminRepo.findByEmailAndUserNameAndPassword(email, userName, password);
 
         if(existingAdminInfo == null){
-            throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED);
+            throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, " ADMIN ACCOUNT DOES NOT EXIST ");
         }
         adminRepo.findAll();
         return ResponseEntity.ok(" LOGIN SUCCESSFULLY ");

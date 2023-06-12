@@ -49,6 +49,6 @@ public class AdminController {
 
     @GetMapping("/logInAsAdmin")
     ResponseEntity <String> logInAdmin(@RequestParam String userName, @RequestParam String email, @RequestParam String password){
-        return adminService.logInAdmin(userName, email, password) ;g
+        return adminService.logInAdmin(userName, email, password) ;
     }
 }
