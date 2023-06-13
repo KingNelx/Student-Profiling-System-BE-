@@ -78,7 +78,7 @@ public class AdminImpl implements AdminService {
         if(existingAdminInfo == null){
             throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, " ADMIN ACCOUNT DOES NOT EXIST ");
         }
-        adminRepo.findAll();
+
         return ResponseEntity.ok(" LOGIN SUCCESSFULLY ");
     }
 }
