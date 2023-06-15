@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
@@ -60,5 +61,15 @@ public class ClerkImpl implements ClerkService {
         }
         clerkRepo.deleteById(id);
         return ResponseEntity.ok(" DATA ID: " + id + " HAS BEEN DELETED ");
+    }
+
+    @Override
+    public ResponseEntity <String> logInClerk(@RequestParam String userName, @RequestParam String email, @RequestParam String password){
+        Clerk existingClerkInfo = clerkRepo.findByEmailAndUserNameAndPassword(userName, email, password);
+
+        if(existingClerkInfo == null){
+            throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED);
+        }
+        return ResponseEntity.ok(" LOGIN SUCCESSFULLY ");
     }
 }

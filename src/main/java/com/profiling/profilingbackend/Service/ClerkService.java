@@ -12,5 +12,6 @@ public interface ClerkService {
     Optional <Clerk> getClerkInfo(String id);
     ResponseEntity <String> updateClerkInfo(String id, Clerk newClerk);
     ResponseEntity <String> deleteClerkInfo(String id);
+    ResponseEntity <String> logInClerk(String userName, String email, String password);
 
 }
