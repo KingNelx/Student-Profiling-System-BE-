@@ -20,6 +20,7 @@ public class Student {
     @Id
     @GeneratedValue
     private @Getter @Setter String id;
+    private @Getter @Setter String studentID;
     private @Getter @Setter String firstName;
     private @Getter @Setter String lastName;
     private @Getter @Setter String address;
