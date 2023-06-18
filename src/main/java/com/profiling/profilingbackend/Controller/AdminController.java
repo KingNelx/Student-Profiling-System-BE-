@@ -1,7 +1,9 @@
 package com.profiling.profilingbackend.Controller;
 
 import com.profiling.profilingbackend.Model.Admin;
+import com.profiling.profilingbackend.Model.Student;
 import com.profiling.profilingbackend.Service.AdminService;
+import com.profiling.profilingbackend.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,9 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private StudentService studentService;
 
     @PostMapping("/createAdminAccount")
     ResponseEntity <String> registerNewAdmin(@RequestBody Admin createAdmin){
@@ -44,5 +49,20 @@ public class AdminController {
     @GetMapping("/logInAsAdmin")
     ResponseEntity <String> logInAdmin(@RequestParam String userName, @RequestParam String email, @RequestParam String password){
         return adminService.logInAdmin(userName, email, password) ;
+    }
+
+    // add students
+    @PostMapping("/registerStudent")
+    ResponseEntity <String> registerStudents(@RequestBody Student registerStudent){
+        return studentService.registerStudent(registerStudent);
+    }
+
+    @GetMapping("/getAllStudents")
+    List <Student> getAllStudents(){
+        return studentService.getAllStudents();
+    }
+    @GetMapping("/getStudentData/{id}")
+    Optional <Student> getStudentDataByID(@PathVariable String id){
+        return studentService.getStudentDataByID(id);
     }
 }

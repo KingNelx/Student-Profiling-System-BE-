@@ -1,4 +1,15 @@
 package com.profiling.profilingbackend.Service;
 
+import com.profiling.profilingbackend.Model.Student;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+@Service
 public interface StudentService {
+
+    ResponseEntity <String> registerStudent(Student registerStudent);
+    List <Student> getAllStudents();
+    Optional <Student> getStudentDataByID(String id);
+
 }

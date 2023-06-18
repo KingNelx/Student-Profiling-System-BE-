@@ -18,7 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Student {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private @Getter @Setter String id;
     private @Getter @Setter String studentID;
     private @Getter @Setter String firstName;
@@ -27,12 +27,12 @@ public class Student {
     private @Getter @Setter int age;
     private @Getter @Setter String gender;
 
-    @DBRef
-    private @Getter @Setter FamilyBG familyBG;
-    @DBRef
-    private @Getter @Setter EducationalBG educationalBG;
-    @DBRef
-    private @Getter @Setter OtherBG otherBG;
+//    @DBRef
+//    private @Getter @Setter FamilyBG familyBG;
+//    @DBRef
+//    private @Getter @Setter EducationalBG educationalBG;
+//    @DBRef
+//    private @Getter @Setter OtherBG otherBG;
 
 
 }
