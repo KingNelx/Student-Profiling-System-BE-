@@ -23,9 +23,9 @@ public class Student {
     private @Getter @Setter String studentID;
     private @Getter @Setter String firstName;
     private @Getter @Setter String lastName;
-    private @Getter @Setter String address;
     private @Getter @Setter int age;
     private @Getter @Setter String gender;
+    private @Getter @Setter String course;
 
 //    @DBRef
 //    private @Getter @Setter FamilyBG familyBG;
