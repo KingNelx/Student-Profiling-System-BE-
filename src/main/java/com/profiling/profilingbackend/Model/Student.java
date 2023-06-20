@@ -26,13 +26,10 @@ public class Student {
     private @Getter @Setter int age;
     private @Getter @Setter String gender;
     private @Getter @Setter String course;
+    private @Getter @Setter String email;
+    private @Getter @Setter String contactNumber;
 
-//    @DBRef
-//    private @Getter @Setter FamilyBG familyBG;
-//    @DBRef
-//    private @Getter @Setter EducationalBG educationalBG;
-//    @DBRef
-//    private @Getter @Setter OtherBG otherBG;
-
+    @DBRef
+    private @Getter @Setter FamilyBG familyBG;
 
 }
