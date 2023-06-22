@@ -11,5 +11,6 @@ public interface StudentService {
     ResponseEntity <String> registerStudent(Student registerStudent);
     List <Student> getAllStudents();
     Optional <Student> getStudentDataByID(String id);
+    ResponseEntity <String> removeStudentDataByID(String id);
 
 }

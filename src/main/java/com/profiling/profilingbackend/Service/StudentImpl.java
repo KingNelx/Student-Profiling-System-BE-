@@ -41,4 +41,13 @@ public class StudentImpl implements StudentService {
         return studentRepo.findById(id);
     }
 
+    @Override
+    public ResponseEntity <String> removeStudentDataByID(@PathVariable String id){
+        if(studentRepo.findById(id).isPresent()) {
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+        }
+        studentRepo.deleteById(id);
+        return ResponseEntity.ok(" STUDENT WITH ID: " + id + " HAS BEEN DELETED ");
+    }
+
 }

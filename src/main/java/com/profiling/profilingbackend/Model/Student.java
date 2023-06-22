@@ -30,6 +30,8 @@ public class Student {
     private @Getter @Setter String contactNumber;
 
     @DBRef
+    private @Getter @Setter EducationalBG educationalBG;
+    @DBRef
     private @Getter @Setter FamilyBG familyBG;
 
 }
