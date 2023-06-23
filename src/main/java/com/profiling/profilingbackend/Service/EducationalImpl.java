@@ -39,7 +39,7 @@ public class EducationalImpl implements EducationalService{
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
         educationalBGRepo.deleteById(id);
-        return ResponseEntity.ok(" STUDENT EDUCATIONAL BACKGROUND with ID: " + id + " HAS BEEN DELETED ");
+        return ResponseEntity.ok(" EDUCATIONAL BACKGROUND REMOVE g");
     }
 
 }
