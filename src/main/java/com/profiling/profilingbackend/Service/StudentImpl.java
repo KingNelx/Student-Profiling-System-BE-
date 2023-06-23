@@ -1,7 +1,11 @@
 package com.profiling.profilingbackend.Service;
 
 
+import com.profiling.profilingbackend.Model.EducationalBG;
+import com.profiling.profilingbackend.Model.FamilyBG;
 import com.profiling.profilingbackend.Model.Student;
+import com.profiling.profilingbackend.Repository.EducationalBGRepo;
+import com.profiling.profilingbackend.Repository.FamilyBGRepo;
 import com.profiling.profilingbackend.Repository.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +23,23 @@ public class StudentImpl implements StudentService {
     @Autowired
     private StudentRepo studentRepo;
 
+    @Autowired
+    private EducationalBGRepo educationalBGRepo;
+    @Autowired
+    private FamilyBGRepo familyBGRepo;
+
     @Override
     public ResponseEntity <String> registerStudent(@RequestBody Student registerStudents){
+
+        EducationalBG educationalBG = registerStudents.getEducationalBG();
+        FamilyBG familyBG = registerStudents.getFamilyBG();
+
+        if(educationalBG == null || familyBG == null){
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+        }
+
+        educationalBGRepo.save(educationalBG);
+        familyBGRepo.save(familyBG);
         studentRepo.save(registerStudents);
         return ResponseEntity.ok(" NEW STUDENT ADDED ");
     }

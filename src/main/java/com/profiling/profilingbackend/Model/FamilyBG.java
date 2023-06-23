@@ -21,10 +21,10 @@ public class FamilyBG {
     private @Getter @Setter String id;
     private @Getter @Setter String fathersName;
     private @Getter @Setter String fathersOccupation;
-    private @Getter @Setter String fathersAge;
+    private @Getter @Setter int fathersAge;
     private @Getter @Setter String fathersHighestEducation;
     private @Getter @Setter String mothersName;
     private @Getter @Setter String mothersOccupation;
-    private @Getter @Setter String mothersAge;
+    private @Getter @Setter int mothersAge;
     private @Getter @Setter String mothersHighestEducation;
 }

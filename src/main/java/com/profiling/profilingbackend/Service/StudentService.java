@@ -1,5 +1,7 @@
 package com.profiling.profilingbackend.Service;
 
+import com.profiling.profilingbackend.Model.EducationalBG;
+import com.profiling.profilingbackend.Model.FamilyBG;
 import com.profiling.profilingbackend.Model.Student;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

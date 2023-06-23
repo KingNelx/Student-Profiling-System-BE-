@@ -1,6 +1,8 @@
 package com.profiling.profilingbackend.Controller;
 
 import com.profiling.profilingbackend.Model.Admin;
+import com.profiling.profilingbackend.Model.EducationalBG;
+import com.profiling.profilingbackend.Model.FamilyBG;
 import com.profiling.profilingbackend.Model.Student;
 import com.profiling.profilingbackend.Service.AdminService;
 import com.profiling.profilingbackend.Service.StudentService;
@@ -61,8 +63,16 @@ public class AdminController {
     List <Student> getAllStudents(){
         return studentService.getAllStudents();
     }
+
     @GetMapping("/getStudentData/{id}")
     Optional <Student> getStudentDataByID(@PathVariable String id){
         return studentService.getStudentDataByID(id);
     }
+
+
+    @DeleteMapping("/deleteStudentData/{id}")
+    ResponseEntity <String> removeStudentDataByID(@PathVariable String id){
+        return studentService.removeStudentDataByID(id);
+    }
+
 }
