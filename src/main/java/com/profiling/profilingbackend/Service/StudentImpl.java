@@ -31,15 +31,15 @@ public class StudentImpl implements StudentService {
     @Override
     public ResponseEntity <String> registerStudent(@RequestBody Student registerStudents){
 
-        EducationalBG educationalBG = registerStudents.getEducationalBG();
-        FamilyBG familyBG = registerStudents.getFamilyBG();
-
-        if(educationalBG == null || familyBG == null){
-            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
-        }
-
-        educationalBGRepo.save(educationalBG);
-        familyBGRepo.save(familyBG);
+//        EducationalBG educationalBG = registerStudents.getEducationalBG();
+//        FamilyBG familyBG = registerStudents.getFamilyBG();
+//
+//        if(educationalBG == null || familyBG == null){
+//            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+//        }
+//
+//        educationalBGRepo.save(educationalBG);
+//        familyBGRepo.save(familyBG);
         studentRepo.save(registerStudents);
         return ResponseEntity.ok(" NEW STUDENT ADDED ");
     }
@@ -62,11 +62,55 @@ public class StudentImpl implements StudentService {
 
     @Override
     public ResponseEntity <String> removeStudentDataByID(@PathVariable String id){
-        if(studentRepo.findById(id).isPresent()) {
-            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
-        }
-        studentRepo.deleteById(id);
-        return ResponseEntity.ok(" STUDENT WITH ID: " + id + " HAS BEEN DELETED ");
+       Optional <Student> studentHandler = studentRepo.findById(id);
+       if(!studentHandler.isPresent()){
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+       }
+       Student student = studentHandler.get();
+       educationalBGRepo.deleteById(student.getEducationalBG().getId());
+       familyBGRepo.deleteById(student.getFamilyBG().getId());
+
+       return ResponseEntity.ok(" STUDENT WITH ID: " + id + " DATA HAS BEEN DELETED ");
     }
 
+
+    @Override
+    public List <Student> findAllMales(){
+        if(studentRepo.findByGender("MALE").isEmpty()){
+            throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+        }
+        return studentRepo.findByGender("MALE");
+    }
+
+    @Override
+    public List <Student> findAllFemales(){
+        if(studentRepo.findByGender("FEMALE").isEmpty()){
+            throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+        }
+        return studentRepo.findByGender("FEMALE");
+    }
+
+    @Override
+    public List <Student> findAllBSIT(){
+        if(studentRepo.findByCourse("BSIT").isEmpty()){
+            throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+        }
+        return studentRepo.findByCourse("BSIT");
+    }
+
+    @Override
+    public List <Student> findAllBSIS(){
+        if(studentRepo.findByCourse("BSIS").isEmpty()){
+            throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+        }
+        return studentRepo.findByCourse("BSIS");
+    }
+
+    @Override
+    public List <Student> findAllBSCS(){
+        if(studentRepo.findByCourse("BSCS").isEmpty()){
+            throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+        }
+        return studentRepo.findByCourse("BSCS");
+    }
 }

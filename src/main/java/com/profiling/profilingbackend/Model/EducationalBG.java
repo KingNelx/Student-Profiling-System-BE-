@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @AllArgsConstructor
@@ -37,4 +38,7 @@ public class EducationalBG {
     private @Getter @Setter String collegeYearGraduated;
     private @Getter @Setter String collegeAcademicAward;
     private @Getter @Setter String collegeAddress;
+
+   // coleen.chua@collaberadigital.com
+
 }
