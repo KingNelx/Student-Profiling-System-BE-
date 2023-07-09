@@ -82,6 +82,11 @@ public class AdminController {
         return studentService.removeStudentDataByID(id);
     }
 
+    @PutMapping("/updateStudentData/{id}")
+    ResponseEntity <String> updateStudentData(@RequestBody Student studentData, @PathVariable String id){
+        return studentService.updateStudentData(studentData, id);
+    }
+
     @GetMapping("/allMaleStudents")
     List <Student> allMaleStudent(){
         return studentService.findAllMales();
@@ -101,4 +106,10 @@ public class AdminController {
     List <Student> allBSIS(){
         return studentService.findAllBSIS();
     }
+
+    @GetMapping("/BSCS")
+    List <Student> allBSCS(){
+        return studentService.findAllBSCS();
+    }
+
 }

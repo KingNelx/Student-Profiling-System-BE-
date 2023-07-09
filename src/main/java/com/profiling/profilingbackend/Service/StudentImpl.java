@@ -75,6 +75,22 @@ public class StudentImpl implements StudentService {
 
 
     @Override
+    public ResponseEntity <String> updateStudentData(@RequestBody Student updateStudent, @PathVariable String id){
+        Student existingStudentData = studentRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+        existingStudentData.setStudentID(updateStudent.getStudentID());
+        existingStudentData.setFirstName(updateStudent.getFirstName());
+        existingStudentData.setLastName(updateStudent.getLastName());
+        existingStudentData.setAge(updateStudent.getAge());
+        existingStudentData.setGender(updateStudent.getGender());
+        existingStudentData.setCourse(updateStudent.getCourse());
+        existingStudentData.setEmail(updateStudent.getEmail());
+        existingStudentData.setContactNumber(updateStudent.getContactNumber());
+
+        studentRepo.save(existingStudentData);
+        return ResponseEntity.ok(" STUDENT DATA WITH ID: "+ id + "SUCCESSFULLY UPDATED");
+    }
+
+    @Override
     public List <Student> findAllMales(){
         if(studentRepo.findByGender("MALE").isEmpty()){
             throw new HttpClientErrorException(HttpStatus.NO_CONTENT);

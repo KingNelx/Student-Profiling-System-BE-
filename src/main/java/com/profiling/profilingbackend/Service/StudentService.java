@@ -14,6 +14,7 @@ public interface StudentService {
     List <Student> getAllStudents();
     Optional <Student> getStudentDataByID(String id);
     ResponseEntity <String> removeStudentDataByID(String id);
+    ResponseEntity <String> updateStudentData(Student updateData, String id);
     List <Student> findAllMales();
     List <Student> findAllFemales();
     List <Student> findAllBSIT();
