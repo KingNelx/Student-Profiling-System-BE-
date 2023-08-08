@@ -1,4 +1,7 @@
 package com.profiling.profilingbackend.Repository;
 
-public interface StudentPersonalRepo  {
+import com.profiling.profilingbackend.Entity.StudentPersonalBackground;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface StudentPersonalRepo extends MongoRepository <StudentPersonalBackground, String>{
 }
