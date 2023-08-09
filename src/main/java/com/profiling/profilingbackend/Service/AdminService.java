@@ -23,4 +23,7 @@ public interface AdminService {
 
     // delete admin by id
     ResponseEntity <String> deleteAdminByID(String id);
+
+    // logg as admin
+    ResponseEntity <String> logInAsAdmin(String email, String username, String password);
 }

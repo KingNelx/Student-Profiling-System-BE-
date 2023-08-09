@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
@@ -68,5 +69,15 @@ public class AdminImpl implements AdminService{
         }
         adminRepo.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body(" ADMIN DATA HAS BEEN DELETED ");
+    }
+
+    @Override
+    public ResponseEntity <String> logInAsAdmin(@RequestParam String email, @RequestParam String userName, @RequestParam String password){
+        Admin existingAdminData = adminRepo.findByEmailAndUserNameAndPassword(email, userName, password);
+        if(existingAdminData != null){
+            return ResponseEntity.status(HttpStatus.OK).body(" LOGGED IN SUCCESSFULLY ");
+        }else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(" INVALID CREDENTIALS ");
+        }
     }
 }
