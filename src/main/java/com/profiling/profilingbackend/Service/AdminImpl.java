@@ -5,12 +5,14 @@ import com.profiling.profilingbackend.Repository.AdminRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.Optional;
+@Service
 public class AdminImpl implements AdminService{
 
     @Autowired
@@ -19,7 +21,7 @@ public class AdminImpl implements AdminService{
     @Override
     public ResponseEntity <String> createAdmin(@RequestBody Admin createAdmin) {
         Optional <Admin> existingEmail = adminRepo.findByEmail(createAdmin.getEmail());
-        Optional <Admin> existingUsername = adminRepo.findByUsername(createAdmin.getUserName());
+        Optional <Admin> existingUsername = adminRepo.findByUserName(createAdmin.getUserName());
 
         if(existingEmail.isPresent() || existingUsername.isPresent()){
             return ResponseEntity.status(HttpStatus.CONFLICT).body(" EMAIL AND USERNAME ALREADY EXISTED ");
