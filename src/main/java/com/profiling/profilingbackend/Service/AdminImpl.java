@@ -42,7 +42,7 @@ public class AdminImpl implements AdminService{
     @Override
     public Optional <Admin> getAdminByID(@PathVariable String id) {
 
-        if(!adminRepo.findById(id).isPresent()){
+        if(adminRepo.findById(id).isEmpty()){
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
         return adminRepo.findById(id);
@@ -64,7 +64,7 @@ public class AdminImpl implements AdminService{
 
     @Override
     public ResponseEntity <String> deleteAdminByID(@PathVariable String id){
-        if(!adminRepo.findById(id).isPresent()){
+        if(adminRepo.findById(id).isEmpty()){
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
         adminRepo.deleteById(id);
