@@ -1,6 +1,6 @@
 package com.profiling.profilingbackend.Repository;
 
-g
+
 import com.profiling.profilingbackend.Entity.Clerk;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.Optional;
