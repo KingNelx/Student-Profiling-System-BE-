@@ -22,4 +22,7 @@ public interface ClerkService {
 
     // delete clerk by id
     ResponseEntity <String> deleteClerkByData(String id);
+
+    // clerk log in
+    ResponseEntity <String> logInAsClerk(String email, String username, String password);
 }

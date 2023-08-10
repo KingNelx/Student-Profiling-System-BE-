@@ -10,6 +10,7 @@ import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 
 @Service
@@ -69,6 +70,16 @@ public class ClerkImpl implements  ClerkService {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }else{
             return ResponseEntity.status(HttpStatus.OK).body(" CLERK DATA HAS BEEN DELETED ");
+        }
+    }
+    @Override
+    public ResponseEntity <String> logInAsClerk(@RequestParam String email, @RequestParam String username, @RequestParam String password){
+        Clerk existingClerkData = clerkRepo.findByEmailAndUserNameAndPassword(email, username, password);
+
+        if(existingClerkData != null){
+            return ResponseEntity.status(HttpStatus.OK).body(" LOGGED IN SUCCESSFULLY ");
+        }else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(" INVALID CREDENTIALS ");
         }
     }
 }
