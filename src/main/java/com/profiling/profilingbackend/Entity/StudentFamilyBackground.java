@@ -10,6 +10,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Entity
 @Document(collection = "StudentFamilyBackground")
+@AllArgsConstructor
+@NoArgsConstructor
 public class StudentFamilyBackground {
     @Id
     private @Getter @Setter String id;
