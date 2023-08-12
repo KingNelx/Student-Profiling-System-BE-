@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "StudentPersonalBackground")
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentPersonalBackground {
+public class Student {
 
     @Id
     private @Getter @Setter String id;
@@ -26,6 +26,6 @@ public class StudentPersonalBackground {
     private @Getter @Setter StudentEducationalBackground studentEducationalBackground;
 
     @DBRef
-    private @Getter @Setter StudentPersonalBackground studentPersonalBackground;
+    private @Getter @Setter StudentFamilyBackground studentFamilyBackground;
 
 }
