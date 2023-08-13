@@ -77,7 +77,52 @@ public class StudentImpl implements StudentService {
         StudentEducationalBackground existingEducationalData = educationalRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
         StudentFamilyBackground existingFamilyData = studentFamilyRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
 
+    /*
 
+    existingStudentData.setFirstName(updateStudent.getFirstName());
+        existingStudentData.setLastName(updateStudent.getLastName());
+        existingStudentData.setGender(updateStudent.getGender());
+        existingStudentData.setAge(updateStudent.getAge());
+
+        existingEducationalData.setElementarySchool(updateStudent.getStudentEducationalBackground().getElementarySchool());
+        existingEducationalData.setElementarySchoolYearStarted(updateStudent.getStudentEducationalBackground().getElementarySchoolYearStarted());
+        existingEducationalData.setElementarySchoolYearEnded(updateStudent.getStudentEducationalBackground().getElementarySchoolYearEnded());
+        existingEducationalData.setElementarySchoolAddress(updateStudent.getStudentEducationalBackground().getElementarySchoolAddress());
+
+        existingEducationalData.setHighSchool(updateStudent.getStudentEducationalBackground().getHighSchool());
+        existingEducationalData.setHighSchoolYearStarted(updateStudent.getStudentEducationalBackground().getHighSchoolYearStarted());
+        existingEducationalData.setHighSchoolYearEnded(updateStudent.getStudentEducationalBackground().getHighSchoolYearEnded());
+        existingEducationalData.setHighSchoolAddress(updateStudent.getStudentEducationalBackground().getHighSchoolAddress());
+
+        existingEducationalData.setSeniorHighSchool(updateStudent.getStudentEducationalBackground().getSeniorHighSchool());
+        existingEducationalData.setSeniorHighYearStarted(updateStudent.getStudentEducationalBackground().getSeniorHighYearStarted());
+        existingEducationalData.setSeniorHighYearEnded(updateStudent.getStudentEducationalBackground().getSeniorHighYearEnded());
+        existingEducationalData.setSeniorHighAddress(updateStudent.getStudentEducationalBackground().getSeniorHighAddress());
+
+        existingEducationalData.setCollege(updateStudent.getStudentEducationalBackground().getCollege());
+        existingEducationalData.setCollegeYearStarted(updateStudent.getStudentEducationalBackground().getCollegeYearStarted());
+        existingEducationalData.setCollegeYearEnded(updateStudent.getStudentEducationalBackground().getCollegeYearEnded());
+        existingEducationalData.setCollegeAddress(updateStudent.getStudentEducationalBackground().getCollegeAddress());
+
+        existingFamilyData.setFathersFirstName(updateStudent.getStudentFamilyBackground().getFathersFirstName());
+        existingFamilyData.setFathersLastName(updateStudent.getStudentFamilyBackground().getFathersLastName());
+        existingFamilyData.setFathersAddress(updateStudent.getStudentFamilyBackground().getFathersAddress());
+        existingFamilyData.setFathersCivilStatus(updateStudent.getStudentFamilyBackground().getFathersCivilStatus());
+        existingFamilyData.setFathersAge(updateStudent.getStudentFamilyBackground().getFathersAge());
+        existingFamilyData.setFathersContactNumber(updateStudent.getStudentFamilyBackground().getFathersContactNumber());
+        existingFamilyData.setFathersOccupation(updateStudent.getStudentFamilyBackground().getFathersOccupation());
+        existingFamilyData.setFathersHighestEducation(updateStudent.getStudentFamilyBackground().getFathersHighestEducation());
+
+        existingFamilyData.setMothersFirstName(updateStudent.getStudentFamilyBackground().getMothersFirstName());
+        existingFamilyData.setMothersLastName(updateStudent.getStudentFamilyBackground().getMothersLastName());
+        existingFamilyData.setMothersAddress(updateStudent.getStudentFamilyBackground().getMothersAddress());
+        existingFamilyData.setMothersCivilStatus(updateStudent.getStudentFamilyBackground().getMothersCivilStatus());
+        existingFamilyData.setMothersAge(updateStudent.getStudentFamilyBackground().getMothersAge());
+        existingFamilyData.setMothersContactNumber(updateStudent.getStudentFamilyBackground().getMothersContactNumber());
+        existingFamilyData.setMothersOccupation(updateStudent.getStudentFamilyBackground().getMothersOccupation());
+        existingFamilyData.setMothersHighestEducation(updateStudent.getStudentFamilyBackground().getMothersHighestEducation());
+
+     */
         studentRepo.save(existingStudentData);
         educationalRepo.save(existingEducationalData);
         studentFamilyRepo.save(existingFamilyData);
