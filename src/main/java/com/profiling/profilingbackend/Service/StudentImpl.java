@@ -74,12 +74,14 @@ public class StudentImpl implements StudentService {
     public ResponseEntity <String> updateStudentByID(@PathVariable String id, @RequestBody Student updateStudent){
 
         Student existingStudentData = studentRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
-        StudentEducationalBackground existingEducationalData = educationalRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
-        StudentFamilyBackground existingFamilyData = studentFamilyRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+        StudentEducationalBackground existingEducationalData = updateStudent.getStudentEducationalBackground();
+        StudentFamilyBackground existingFamilyData = updateStudent.getStudentFamilyBackground();
 
-    /*
+        if(existingEducationalData == null || existingFamilyData == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(" DATA CAN NO BE EMPTY ");
+        }
 
-    existingStudentData.setFirstName(updateStudent.getFirstName());
+        existingStudentData.setFirstName(updateStudent.getFirstName());
         existingStudentData.setLastName(updateStudent.getLastName());
         existingStudentData.setGender(updateStudent.getGender());
         existingStudentData.setAge(updateStudent.getAge());
@@ -122,7 +124,7 @@ public class StudentImpl implements StudentService {
         existingFamilyData.setMothersOccupation(updateStudent.getStudentFamilyBackground().getMothersOccupation());
         existingFamilyData.setMothersHighestEducation(updateStudent.getStudentFamilyBackground().getMothersHighestEducation());
 
-     */
+
         studentRepo.save(existingStudentData);
         educationalRepo.save(existingEducationalData);
         studentFamilyRepo.save(existingFamilyData);
@@ -134,13 +136,18 @@ public class StudentImpl implements StudentService {
     @Override
     public ResponseEntity <String> deleteStudentByID(@PathVariable String id){
 
-        Optional<StudentEducationalBackground> existingEducationalData = educationalRepo.findById(id);
-        Optional<StudentFamilyBackground> existingFamilyData = studentFamilyRepo.findById(id);
+        Optional <Student> existingData = studentRepo.findById(id);
 
-        if(studentRepo.findById(id).isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(" STUDENT ID: " + id + " DOES NOT EXIST");
+        if(existingData.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(" STUDENT DOES NOT EXIST ");
         }
+
+        Student student = existingData.get();
+
         studentRepo.deleteById(id);
+        educationalRepo.deleteById(student.getStudentEducationalBackground().getId());
+        studentFamilyRepo.deleteById(student.getStudentFamilyBackground().getId());
+
         return ResponseEntity.status(HttpStatus.OK).body(" STUDENT DATA: " + id + " HAS BEEN DELETED ");
     }
 }
