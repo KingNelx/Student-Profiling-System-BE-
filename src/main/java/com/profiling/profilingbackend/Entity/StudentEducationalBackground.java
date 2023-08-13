@@ -26,7 +26,7 @@ public class StudentEducationalBackground {
     private @Getter @Setter String highSchool;
     private @Getter @Setter String highSchoolYearStarted;
     private @Getter @Setter String highSchoolYearEnded;
-    private @Getter @Setter String highSchoolYearAddress;
+    private @Getter @Setter String highSchoolAddress;
 
     // senior high school
     private @Getter @Setter String seniorHighSchool;

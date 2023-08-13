@@ -51,6 +51,7 @@ public class AdminImpl implements AdminService{
     @Override
     public ResponseEntity <String> updateAdminDataByID(@PathVariable String id, @RequestBody Admin newAdminData){
         Admin existingAdmin = adminRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+
         existingAdmin.setFirstName(newAdminData.getFirstName());
         existingAdmin.setLastName(newAdminData.getLastName());
         existingAdmin.setEmail(newAdminData.getEmail());

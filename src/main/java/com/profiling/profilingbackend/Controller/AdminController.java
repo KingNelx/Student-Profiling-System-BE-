@@ -75,6 +75,11 @@ public class AdminController {
         return studentService.getStudentByID(id);
     }
 
+    @PutMapping("/update-student/id/{id}")
+    ResponseEntity <String> updateStudentDataByID(@PathVariable String id, @RequestBody Student newData){
+        return studentService.updateStudentByID(id, newData);
+    }
+
     @DeleteMapping("/delete-student/id/{id}")
     ResponseEntity <String> deleteStudentByID(@PathVariable String id){
         return studentService.deleteStudentByID(id);

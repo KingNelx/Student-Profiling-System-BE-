@@ -18,7 +18,7 @@ public interface StudentService {
     Optional <Student> getStudentByID(String id);
 
     // update student data
-
+    ResponseEntity <String> updateStudentByID(String id, Student updateStudent);
     // delete student by id
     ResponseEntity <String> deleteStudentByID(String id);
 }

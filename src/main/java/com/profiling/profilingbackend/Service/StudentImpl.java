@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
@@ -63,15 +64,35 @@ public class StudentImpl implements StudentService {
 
     @Override
     public Optional <Student> getStudentByID(@PathVariable String id) {
-        if(!studentRepo.findById(id).isPresent()){
+        if(studentRepo.findById(id).isEmpty()){
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
         return studentRepo.findById(id);
     }
 
     @Override
+    public ResponseEntity <String> updateStudentByID(@PathVariable String id, @RequestBody Student updateStudent){
+
+        Student existingStudentData = studentRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+        StudentEducationalBackground existingEducationalData = educationalRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+        StudentFamilyBackground existingFamilyData = studentFamilyRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+
+
+        studentRepo.save(existingStudentData);
+        educationalRepo.save(existingEducationalData);
+        studentFamilyRepo.save(existingFamilyData);
+
+        return ResponseEntity.status(HttpStatus.OK).body(" STUDENT DATA GOT UPDATED ");
+
+    }
+
+    @Override
     public ResponseEntity <String> deleteStudentByID(@PathVariable String id){
-        if(!studentRepo.findById(id).isPresent()){
+
+        Optional<StudentEducationalBackground> existingEducationalData = educationalRepo.findById(id);
+        Optional<StudentFamilyBackground> existingFamilyData = studentFamilyRepo.findById(id);
+
+        if(studentRepo.findById(id).isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(" STUDENT ID: " + id + " DOES NOT EXIST");
         }
         studentRepo.deleteById(id);
