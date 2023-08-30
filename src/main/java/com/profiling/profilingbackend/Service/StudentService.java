@@ -21,4 +21,10 @@ public interface StudentService {
     ResponseEntity <String> updateStudentByID(String id, Student updateStudent);
     // delete student by id
     ResponseEntity <String> deleteStudentByID(String id);
+
+    // get student by gender
+    List <Student> getMales();
+    List <Student> getFemales();
+
+
 }

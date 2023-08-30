@@ -150,5 +150,21 @@ public class StudentImpl implements StudentService {
 
         return ResponseEntity.status(HttpStatus.OK).body(" STUDENT DATA: " + id + " HAS BEEN DELETED ");
     }
+
+    @Override
+    public List <Student> getMales(){
+        if(studentRepo.findByGender("Male").isEmpty()){
+            throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+        }
+        return studentRepo.findByGender("Male");
+    }
+
+    @Override
+    public List <Student> getFemales(){
+        if(studentRepo.findByGender("Female").isEmpty()){
+            throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+        }
+        return studentRepo.findByGender("Female");
+    }
 }
 

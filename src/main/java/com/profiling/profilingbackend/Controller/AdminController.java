@@ -86,4 +86,14 @@ public class AdminController {
     ResponseEntity <String> deleteStudentByID(@PathVariable String id){
         return studentService.deleteStudentByID(id);
     }
+
+    @GetMapping("/all-males")
+    List <Student> getMales(){
+    return studentService.getMales();
+    }
+
+    @GetMapping("/all-females")
+    List <Student> getFemales(){
+        return studentService.getFemales();
+    }
 }
