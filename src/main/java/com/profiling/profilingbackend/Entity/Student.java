@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDate;
 
@@ -46,4 +47,7 @@ public class Student {
 
     @Column(nullable = false)
     private @Getter @Setter String address;
+
+    @DBRef
+    private @Getter @Setter Education education;
 }
