@@ -1,4 +1,4 @@
 package com.profiling.profilingbackend.Services;
 
-public class AdminImpl {
+public class AdminImpl implements AdminService {
 }
