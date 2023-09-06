@@ -50,4 +50,7 @@ public class Student {
 
     @DBRef
     private @Getter @Setter Education education;
+
+    @DBRef
+    private @Getter @Setter Parents parents;
 }
