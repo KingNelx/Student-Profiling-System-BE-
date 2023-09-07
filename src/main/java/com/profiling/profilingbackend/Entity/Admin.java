@@ -25,7 +25,7 @@ public class Admin {
     private @Getter @Setter String lastName;
 
     @Column(nullable = false)
-    private @Getter @Setter String emailAddress;
+    private @Getter @Setter String email;
 
     @Column(nullable = false)
     private @Getter @Setter String userName;

@@ -13,4 +13,12 @@ public interface AdminService {
     // create admin account
     ResponseEntity <String> createAdminAccount(Admin createAccount);
 
+    // get all admins
+    List <Admin> queryAllAdmins();
+    // get admin info by id
+    Optional <Admin> queryAdminByID(String id);
+    // update admin info by id
+
+    // delete admin info by id
+
 }

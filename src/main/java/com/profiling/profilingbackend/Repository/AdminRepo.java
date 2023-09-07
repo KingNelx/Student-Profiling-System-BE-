@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface AdminRepo extends MongoRepository <Admin, String> {
 
-    Optional <Admin> findByEmail(String emailAddress);
+    Optional <Admin> findByEmail(String email);
     Optional <Admin> findByLastName(String lastName);
 }
