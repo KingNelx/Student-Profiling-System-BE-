@@ -21,5 +21,7 @@ public interface AdminService {
     ResponseEntity <String> updateAdminInfo(String id, Admin admin);
     // delete admin info by id
     ResponseEntity <String> deleteAdminData(String id);
+    // admin logIn
+    ResponseEntity <String> logInAsAdmin(String email, String userName, String password);
 
 }

@@ -23,6 +23,13 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+
+    @GetMapping("/admin-login")
+    public ResponseEntity <String> adminLogIn(String userName, String email, String password){
+        return adminService.logInAsAdmin(userName, email, password);
+    }
+
+
     @PostMapping("/create-admin-account")
     public ResponseEntity <String> createAdminAccount(@RequestBody Admin admin){
         return adminService.createAdminAccount(admin);
@@ -47,4 +54,5 @@ public class AdminController {
     public ResponseEntity <String> deleteAdminData(@PathVariable String id){
         return adminService.deleteAdminData(id);
     }
+
 }
