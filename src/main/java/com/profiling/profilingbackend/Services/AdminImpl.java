@@ -49,6 +49,30 @@ public class AdminImpl implements AdminService {
         return adminRepo.findById(id);
     }
 
+    @Override
+    public ResponseEntity <String> updateAdminInfo(@PathVariable String id, @RequestBody Admin updateAccount){
+        Admin existingAdminInfo = adminRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+
+        existingAdminInfo.setFirstName(updateAccount.getFirstName());
+        existingAdminInfo.setLastName(updateAccount.getLastName());
+        existingAdminInfo.setEmail(updateAccount.getEmail());
+        existingAdminInfo.setUserName(updateAccount.getUserName());
+        existingAdminInfo.setPassword(updateAccount.getPassword());
+
+        adminRepo.save(existingAdminInfo);
+        return ResponseEntity.status(HttpStatus.OK).body(" ADMIN ACCOUNT UPDATED");
+    }
+
+
+    @Override
+    public ResponseEntity <String> deleteAdminData(@PathVariable String id){
+        boolean doesExist = adminRepo.findById(id).isPresent();
+
+        if(!doesExist){
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(" ADMIN DATA IS DELETED ");
+    }
 
 
 }

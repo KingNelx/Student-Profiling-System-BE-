@@ -18,7 +18,8 @@ public interface AdminService {
     // get admin info by id
     Optional <Admin> queryAdminByID(String id);
     // update admin info by id
-
+    ResponseEntity <String> updateAdminInfo(String id, Admin admin);
     // delete admin info by id
+    ResponseEntity <String> deleteAdminData(String id);
 
 }

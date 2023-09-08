@@ -4,7 +4,9 @@ import com.profiling.profilingbackend.Entity.Admin;
 import com.profiling.profilingbackend.Services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,5 +36,15 @@ public class AdminController {
     @GetMapping("/queryAdmin-id/{id}")
     public Optional <Admin> queryAdminByID(@PathVariable String id){
         return adminService.queryAdminByID(id);
+    }
+
+    @PutMapping("/update-admin-id/{id}")
+    public ResponseEntity <String> updateAdminData(@PathVariable String id, @RequestBody Admin updateAccount){
+        return adminService.updateAdminInfo(id, updateAccount);
+    }
+
+    @DeleteMapping("/delete-admin/{id}")
+    public ResponseEntity <String> deleteAdminData(@PathVariable String id){
+        return adminService.deleteAdminData(id);
     }
 }
