@@ -72,17 +72,17 @@ public class AdminImpl implements AdminService {
         if(!doesExist){
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
+        adminRepo.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body(" ADMIN DATA IS DELETED ");
     }
 
     @Override
     public ResponseEntity <String> logInAsAdmin(@RequestParam String email, @RequestParam String userName, @RequestBody String password){
         Admin existingData = adminRepo.findByEmailAndUserNameAndPassword(email, userName, password);
-        if(existingData == null){
-            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+        if(existingData != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(" ADMIN LOGGED IN SUCCESSFULLY ");
         }
-
-        return ResponseEntity.status(HttpStatus.OK).body(" ADMIN LOGGED IN SUCCESSFULLY ");
+        throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
     }
 
 
