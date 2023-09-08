@@ -82,7 +82,7 @@ public class AdminImpl implements AdminService {
         if(existingData != null) {
             return ResponseEntity.status(HttpStatus.OK).body(" ADMIN LOGGED IN SUCCESSFULLY ");
         }
-        throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(" ADMIN DATA NOT FOUND ");
     }
 
 
