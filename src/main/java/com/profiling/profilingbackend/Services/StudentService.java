@@ -14,4 +14,6 @@ public interface StudentService {
     List <Student> queryAllStudents();
 
     Optional <Student> getStudentByID(String id);
+
+    ResponseEntity <String> deleteStudentData(String id);
 }

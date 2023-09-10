@@ -33,19 +33,20 @@ public class StudentImpl implements StudentService {
     @Override
     public ResponseEntity <String> addNewStudent(@RequestBody Student addStudent){
 
-        Student existingFirstName = studentRepo.findByFirstName(addStudent.getFirstName());
-        Student existingLastName = studentRepo.findByLastName(addStudent.getLastName());
+        Education education = addStudent.getEducation();
+        Parents parents = addStudent.getParents();
 
-        Education existingEducation = addStudent.getEducation();
-        Parents existingParent = addStudent.getParents();
+        Optional <Student> existingID = studentRepo.findByStudentID(addStudent.getStudentID());
 
-        if(existingFirstName == null && existingLastName == null){
-           if(existingEducation == null && existingParent == null){
-               studentRepo.save(addStudent);
-               return ResponseEntity.status(HttpStatus.OK).body(" NEW STUDENT ADDED ");
-           }
+        if(existingID.isPresent()){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("STUDENT DATA ALREADY EXISTED ");
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(" STUDENT ALREADY REGISTERED ");
+
+        studentRepo.save(addStudent);
+        educationRepo.save(education);
+        parentRepo.save(parents);
+
+        return ResponseEntity.status(HttpStatus.OK).body(" NEW STUDENT ADDED ");
     }
 
     @Override
@@ -64,4 +65,20 @@ public class StudentImpl implements StudentService {
         return studentRepo.findById(id);
     }
 
+    @Override
+    public ResponseEntity <String> deleteStudentData(@PathVariable String id){
+
+        Optional <Student> studentDataHandler = studentRepo.findById(id);
+
+        if(studentDataHandler.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(" DATA DOES NOT EXIST ");
+        }
+
+        Student studentHandler = studentDataHandler.get();
+        studentRepo.deleteById(id);
+        educationRepo.deleteById(studentHandler.getEducation().getId());
+        parentRepo.deleteById(studentHandler.getParents().getId());
+
+        return ResponseEntity.status(HttpStatus.OK).body(" STUDENT DATA HAS BEEN DELETED ");
+    }
 }

@@ -1,7 +1,9 @@
 package com.profiling.profilingbackend.Controller;
 
 import com.profiling.profilingbackend.Entity.Admin;
+import com.profiling.profilingbackend.Entity.Student;
 import com.profiling.profilingbackend.Services.AdminService;
+import com.profiling.profilingbackend.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +25,8 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private StudentService studentService;
 
     @GetMapping("/admin-login")
     public ResponseEntity <String> adminLogIn(String email, String userName, String password){
@@ -53,6 +57,28 @@ public class AdminController {
     @DeleteMapping("/delete-admin/{id}")
     public ResponseEntity <String> deleteAdminData(@PathVariable String id){
         return adminService.deleteAdminData(id);
+    }
+
+
+    // STUDENT SERVICES
+    @PostMapping("/add-student")
+    public ResponseEntity <String> addStudent(@RequestBody Student student){
+        return studentService.addNewStudent(student);
+    }
+
+    @GetMapping("/query-students")
+    public List <Student> queryAllStudents(){
+        return studentService.queryAllStudents();
+    }
+
+    @GetMapping("/query-student/{id}")
+    public Optional <Student> getStudentByID(@PathVariable String id){
+        return studentService.getStudentByID(id);
+    }
+
+    @DeleteMapping("/delete-student/{id}")
+    public ResponseEntity <String> deleteByID(@PathVariable String id){
+        return studentService.deleteStudentData(id);
     }
 
 }

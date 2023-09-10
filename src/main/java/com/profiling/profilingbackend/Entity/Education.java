@@ -22,10 +22,10 @@ public class Education {
     private @Getter @Setter String id;
 
     @Column(nullable = false)
-    private @Getter @Setter String schoolName;
+    private @Getter @Setter String educationLevel;
 
     @Column(nullable = false)
-    private @Getter @Setter String educationLevel;
+    private @Getter @Setter String schoolName;
 
     @Column(nullable = false)
     private @Getter @Setter String gradeLevel;
