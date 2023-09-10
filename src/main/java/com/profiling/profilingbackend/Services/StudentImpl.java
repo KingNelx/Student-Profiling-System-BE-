@@ -11,11 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.security.interfaces.RSAPrivateCrtKey;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -30,26 +34,31 @@ public class StudentImpl implements StudentService {
     @Autowired
     private ParentRepo parentRepo;
 
+    @Transactional
     @Override
-    public ResponseEntity <String> addNewStudent(@RequestBody Student addStudent){
+    public ResponseEntity <String> addNewStudent(@RequestBody Student student) {
 
-        Education education = addStudent.getEducation();
-        Parents parents = addStudent.getParents();
-
-        Optional <Student> existingID = studentRepo.findByStudentID(addStudent.getStudentID());
+        Education education = student.getEducation();
+        Parents parents = student.getParents();
+        Optional <Student> existingID = studentRepo.findByStudentID(student.getStudentID());
 
         if(existingID.isPresent()){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("STUDENT DATA ALREADY EXISTED ");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(" CURRENT DATA ALREADY SAVED ");
         }
-
-        studentRepo.save(addStudent);
-        educationRepo.save(education);
-        parentRepo.save(parents);
-
-        return ResponseEntity.status(HttpStatus.OK).body(" NEW STUDENT ADDED ");
+        try{
+            if(education == null || education.getId() == null || parents == null || parents.getId() == null){
+                educationRepo.save(education);
+                parentRepo.save(parents);
+                studentRepo.save(student);
+                return ResponseEntity.status(HttpStatus.OK).body(" NEW STUDENT ADDED ");
+            }
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @Override
+        @Override
     public List <Student> queryAllStudents(){
         if(studentRepo.findAll().isEmpty()){
             throw new HttpClientErrorException(HttpStatus.NO_CONTENT);

@@ -8,7 +8,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.time.LocalDate;
 
 @Document(collection = "Education")
