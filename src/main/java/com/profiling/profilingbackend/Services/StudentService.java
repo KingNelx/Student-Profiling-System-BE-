@@ -15,6 +15,6 @@ public interface StudentService {
 
     Optional <Student> getStudentByID(String id);
 
-    ResponseEntity <String> updateStudentData(Student newData, String id);
+    ResponseEntity <String> updateStudentData(String id, Student newData);
     ResponseEntity <String> deleteStudentData(String id);
 }

@@ -89,68 +89,61 @@ public class StudentImpl implements StudentService {
 
     @Override
     @Transactional
-    public ResponseEntity <String> updateStudentData(@RequestBody Student newData, @PathVariable String id){
+    public ResponseEntity <String> updateStudentData(@PathVariable String id, @RequestBody Student newData){
+        try{
+            Student existingStudentData = studentRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
 
-       try{
-           Student existingStudentData = studentRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
-           existingStudentData.setStudentID(newData.getStudentID());
-           existingStudentData.setFirstName(newData.getFirstName());
-           existingStudentData.setLastName(newData.getLastName());
-           existingStudentData.setMiddleInitial(newData.getMiddleInitial());
-           existingStudentData.setDateOfBirth(newData.getDateOfBirth());
-           existingStudentData.setGender(newData.getGender());
-           existingStudentData.setContactNumber(newData.getContactNumber());
-           existingStudentData.setEmailAddress(newData.getEmailAddress());
-           existingStudentData.setAddress(newData.getAddress());
-           studentRepo.save(existingStudentData);
+            if(existingStudentData != null){
+                existingStudentData.setStudentID(newData.getStudentID());
+                existingStudentData.setFirstName(newData.getFirstName());
+                existingStudentData.setLastName(newData.getLastName());
+                existingStudentData.setMiddleInitial(newData.getMiddleInitial());
+                existingStudentData.setDateOfBirth(newData.getDateOfBirth());
+                existingStudentData.setGender(newData.getGender());
+                existingStudentData.setContactNumber(newData.getContactNumber());
+                existingStudentData.setEmailAddress(newData.getEmailAddress());
+                existingStudentData.setAddress(newData.getAddress());
+                studentRepo.save(existingStudentData);
 
-           Education existingEducationData = newData.getEducation();
+                Education existingEducationData = newData.getEducation();
+                    if(existingEducationData.getId() != null){
+                        existingEducationData.setEducationLevel(newData.getEducation().getEducationLevel());
+                        existingEducationData.setSchoolName(newData.getEducation().getSchoolName());
+                        existingEducationData.setGradeLevel(newData.getEducation().getGradeLevel());
+                        existingEducationData.setDateStarted(newData.getEducation().getDateStarted());
+                        existingEducationData.setExpectedGraduationYear(newData.getEducation().getExpectedGraduationYear());
+                        existingEducationData.setSchoolAddress(newData.getEducation().getSchoolAddress());
+                        educationRepo.save(existingEducationData);
+                    }
 
-           if(existingEducationData != null){
-               String educationID = existingEducationData.getId();
-             if(educationID != null && !educationID.isEmpty()){
-                 existingEducationData.setEducationLevel(newData.getEducation().getEducationLevel());
-                 existingEducationData.setSchoolName(newData.getEducation().getSchoolName());
-                 existingEducationData.setGradeLevel(newData.getEducation().getGradeLevel());
-                 existingEducationData.setDateStarted(newData.getEducation().getDateStarted());
-                 existingEducationData.setExpectedGraduationYear(newData.getEducation().getExpectedGraduationYear());
-                 existingEducationData.setSchoolAddress(newData.getEducation().getSchoolAddress());
-                 educationRepo.save(existingEducationData);
-             }
-           }
+                Parents existingParentsData = newData.getParents();
 
-           Parents existingParentsData = newData.getParents();
+                  if(existingParentsData.getId() != null){
+                      existingParentsData.setFathersFullName(newData.getParents().getFathersFullName());
+                      existingParentsData.setFathersAge(newData.getParents().getFathersAge());
+                      existingParentsData.setFathersAddress(newData.getParents().getFathersAddress());
+                      existingParentsData.setFathersContactNumber(newData.getParents().getFathersContactNumber());
+                      existingParentsData.setFathersCivilStatus(newData.getParents().getFathersCivilStatus());
+                      existingParentsData.setFathersOccupation(newData.getParents().getFathersOccupation());
+                      existingParentsData.setFathersEducationLevel(newData.getParents().getFathersEducationLevel());
+                      existingParentsData.setFathersDateOfBirth(newData.getParents().getFathersDateOfBirth());
 
-           if(existingParentsData != null){
-               String parentID = existingParentsData.getId();
-               if(parentID != null && !parentID.isEmpty()){
-                   existingParentsData.setFathersFullName(newData.getParents().getFathersFullName());
-                   existingParentsData.setFathersAge(newData.getParents().getFathersAge());
-                   existingParentsData.setFathersAddress(newData.getParents().getFathersAddress());
-                   existingParentsData.setFathersContactNumber(newData.getParents().getFathersContactNumber());
-                   existingParentsData.setFathersCivilStatus(newData.getParents().getFathersCivilStatus());
-                   existingParentsData.setFathersOccupation(newData.getParents().getFathersOccupation());
-                   existingParentsData.setFathersEducationLevel(newData.getParents().getFathersEducationLevel());
-                   existingParentsData.setFathersDateOfBirth(newData.getParents().getFathersDateOfBirth());
+                      existingParentsData.setMothersFullName(newData.getParents().getMothersFullName());
+                      existingParentsData.setMothersAge(newData.getParents().getMothersAge());
+                      existingParentsData.setMothersAddress(newData.getParents().getMothersAddress());
+                      existingParentsData.setMothersContactNumber(newData.getParents().getMothersContactNumber());
+                      existingParentsData.setMothersCivilStatus(newData.getParents().getMothersCivilStatus());
+                      existingParentsData.setMothersOccupation(newData.getParents().getMothersOccupation());
+                      existingParentsData.setMothersEducationLevel(newData.getParents().getMothersEducationLevel());
+                      existingParentsData.setMothersDateOfBirth(newData.getParents().getMothersDateOfBirth());
+                      parentRepo.save(existingParentsData);
+                  }
 
-                   existingParentsData.setMothersFullName(newData.getParents().getMothersFullName());
-                   existingParentsData.setMothersAge(newData.getParents().getMothersAge());
-                   existingParentsData.setMothersAddress(newData.getParents().getMothersAddress());
-                   existingParentsData.setMothersContactNumber(newData.getParents().getMothersContactNumber());
-                   existingParentsData.setMothersCivilStatus(newData.getParents().getMothersCivilStatus());
-                   existingParentsData.setMothersOccupation(newData.getParents().getMothersOccupation());
-                   existingParentsData.setMothersEducationLevel(newData.getParents().getMothersEducationLevel());
-                   existingParentsData.setMothersDateOfBirth(newData.getParents().getMothersDateOfBirth());
-                   parentRepo.save(existingParentsData);
-               }
-           }
-
-           return ResponseEntity.status(HttpStatus.OK).body(" DATA UPDATED SUCCESSFULLY ");
-       }catch (HttpClientErrorException e){
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("STUDENT NOT FOUND");
-       }catch (Exception e){
-           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-       }
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(" SUCCESSFULLY UPDATED ");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
 }
