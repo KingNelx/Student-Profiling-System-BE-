@@ -34,7 +34,7 @@ public class AdminController {
     }
 
 
-    @PostMapping("/create-admin-account")
+    @PostMapping("/ ")
     public ResponseEntity <String> createAdminAccount(@RequestBody Admin admin){
         return adminService.createAdminAccount(admin);
     }
@@ -74,6 +74,11 @@ public class AdminController {
     @GetMapping("/query-student/{id}")
     public Optional <Student> getStudentByID(@PathVariable String id){
         return studentService.getStudentByID(id);
+    }
+
+    @PutMapping("/update-student/{id}")
+    public ResponseEntity <String> updateStudentByID(@RequestBody Student newData, @PathVariable String id){
+        return studentService.updateStudentData(newData, id);
     }
 
     @DeleteMapping("/delete-student/{id}")

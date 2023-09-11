@@ -12,14 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.HttpClientErrorException;
-
-import java.security.interfaces.RSAPrivateCrtKey;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -90,4 +86,71 @@ public class StudentImpl implements StudentService {
 
         return ResponseEntity.status(HttpStatus.OK).body(" STUDENT DATA HAS BEEN DELETED ");
     }
+
+    @Override
+    @Transactional
+    public ResponseEntity <String> updateStudentData(@RequestBody Student newData, @PathVariable String id){
+
+       try{
+           Student existingStudentData = studentRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+           existingStudentData.setStudentID(newData.getStudentID());
+           existingStudentData.setFirstName(newData.getFirstName());
+           existingStudentData.setLastName(newData.getLastName());
+           existingStudentData.setMiddleInitial(newData.getMiddleInitial());
+           existingStudentData.setDateOfBirth(newData.getDateOfBirth());
+           existingStudentData.setGender(newData.getGender());
+           existingStudentData.setContactNumber(newData.getContactNumber());
+           existingStudentData.setEmailAddress(newData.getEmailAddress());
+           existingStudentData.setAddress(newData.getAddress());
+           studentRepo.save(existingStudentData);
+
+           Education existingEducationData = newData.getEducation();
+
+           if(existingEducationData != null){
+               String educationID = existingEducationData.getId();
+             if(educationID != null && !educationID.isEmpty()){
+                 existingEducationData.setEducationLevel(newData.getEducation().getEducationLevel());
+                 existingEducationData.setSchoolName(newData.getEducation().getSchoolName());
+                 existingEducationData.setGradeLevel(newData.getEducation().getGradeLevel());
+                 existingEducationData.setDateStarted(newData.getEducation().getDateStarted());
+                 existingEducationData.setExpectedGraduationYear(newData.getEducation().getExpectedGraduationYear());
+                 existingEducationData.setSchoolAddress(newData.getEducation().getSchoolAddress());
+                 educationRepo.save(existingEducationData);
+             }
+           }
+
+           Parents existingParentsData = newData.getParents();
+
+           if(existingParentsData != null){
+               String parentID = existingParentsData.getId();
+               if(parentID != null && !parentID.isEmpty()){
+                   existingParentsData.setFathersFullName(newData.getParents().getFathersFullName());
+                   existingParentsData.setFathersAge(newData.getParents().getFathersAge());
+                   existingParentsData.setFathersAddress(newData.getParents().getFathersAddress());
+                   existingParentsData.setFathersContactNumber(newData.getParents().getFathersContactNumber());
+                   existingParentsData.setFathersCivilStatus(newData.getParents().getFathersCivilStatus());
+                   existingParentsData.setFathersOccupation(newData.getParents().getFathersOccupation());
+                   existingParentsData.setFathersEducationLevel(newData.getParents().getFathersEducationLevel());
+                   existingParentsData.setFathersDateOfBirth(newData.getParents().getFathersDateOfBirth());
+
+                   existingParentsData.setMothersFullName(newData.getParents().getMothersFullName());
+                   existingParentsData.setMothersAge(newData.getParents().getMothersAge());
+                   existingParentsData.setMothersAddress(newData.getParents().getMothersAddress());
+                   existingParentsData.setMothersContactNumber(newData.getParents().getMothersContactNumber());
+                   existingParentsData.setMothersCivilStatus(newData.getParents().getMothersCivilStatus());
+                   existingParentsData.setMothersOccupation(newData.getParents().getMothersOccupation());
+                   existingParentsData.setMothersEducationLevel(newData.getParents().getMothersEducationLevel());
+                   existingParentsData.setMothersDateOfBirth(newData.getParents().getMothersDateOfBirth());
+                   parentRepo.save(existingParentsData);
+               }
+           }
+
+           return ResponseEntity.status(HttpStatus.OK).body(" DATA UPDATED SUCCESSFULLY ");
+       }catch (HttpClientErrorException e){
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("STUDENT NOT FOUND");
+       }catch (Exception e){
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+       }
+    }
+
 }
