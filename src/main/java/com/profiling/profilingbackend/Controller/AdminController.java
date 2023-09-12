@@ -6,6 +6,7 @@ import com.profiling.profilingbackend.Services.AdminService;
 import com.profiling.profilingbackend.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,6 +21,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/admin")
+@CrossOrigin(origins = "http://localhost:5173/")
 public class AdminController {
 
     @Autowired
@@ -28,13 +30,13 @@ public class AdminController {
     @Autowired
     private StudentService studentService;
 
-    @GetMapping("/admin-login")
+        @GetMapping("/admin-login")
     public ResponseEntity <String> adminLogIn(String email, String userName, String password){
         return adminService.logInAsAdmin(email, userName, password);
     }
 
 
-    @PostMapping("/ ")
+    @PostMapping("/create-admin-account")
     public ResponseEntity <String> createAdminAccount(@RequestBody Admin admin){
         return adminService.createAdminAccount(admin);
     }
