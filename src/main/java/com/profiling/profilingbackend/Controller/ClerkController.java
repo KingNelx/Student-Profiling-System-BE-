@@ -5,6 +5,8 @@ import com.profiling.profilingbackend.Entity.Student;
 import com.profiling.profilingbackend.Services.ClerkService;
 import com.profiling.profilingbackend.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +20,7 @@ import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping("/clerk")
+@CrossOrigin(origins = "http://localhost:5173/")
 public class ClerkController {
 
     @Autowired
@@ -29,6 +32,11 @@ public class ClerkController {
     @PostMapping("/create-account")
     public ResponseEntity <String> createClerkAccount(@RequestBody Clerk clerk){
         return clerkService.createClerkAccount(clerk);
+    }
+
+    @GetMapping("/clerkLogIn")
+    public ResponseEntity <String> clerkLogIn(@RequestParam String email, @RequestParam String userName, @RequestParam String password){
+        return clerkService.clerkLogIn(email, userName, password);
     }
 
     @GetMapping("/query-clerks")

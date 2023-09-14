@@ -19,4 +19,5 @@ public interface ClerkService {
 
     ResponseEntity <String> deleteClerkData(String id);
 
+    ResponseEntity <String> clerkLogIn(String email, String userName, String password);
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
@@ -34,6 +35,19 @@ public class ClerkImpl implements ClerkService{
         }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(" CLERK ACCOUNT ALREADY EXISTED ");
+    }
+
+    @Override
+    public ResponseEntity <String> clerkLogIn(@RequestParam String email, @RequestParam String userName, @RequestParam String password){
+       try{
+           Clerk existingAccount = clerkRepo.findByEmailAndUserNameAndPassword(email, userName, password);
+           if(existingAccount != null){
+               return ResponseEntity.status(HttpStatus.OK).body(" CLERK LOGGED IN SUCCESSFULLY ");
+           }
+       }catch(Exception e){
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+       }
+       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(" CLERK DATA NOT FOUND ");
     }
 
     @Override

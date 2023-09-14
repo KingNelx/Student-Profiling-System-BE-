@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface ClerkRepo extends MongoRepository <Clerk, String> {
     Optional <Clerk> findByEmail (String email);
     Optional <Clerk> findByLastName (String lastName);
+
+    Clerk findByEmailAndUserNameAndPassword(String email, String userName, String password);
 }
