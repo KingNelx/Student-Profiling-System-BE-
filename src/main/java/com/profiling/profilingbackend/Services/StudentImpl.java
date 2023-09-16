@@ -147,11 +147,25 @@ public class StudentImpl implements StudentService {
 
     @Override
     public List <Student> fetchAllMales(){
-       return studentRepo.findByGender("MALE");
+      try{
+          if(!studentRepo.findByGender("MALE").isEmpty()){
+              return studentRepo.findByGender("MALE");
+          }
+      }catch (Exception e){
+          throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+      throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
     }
 
     @Override
     public List <Student> fetchAllFemales(){
-        return studentRepo.findByGender("FEMALE");
+        try{
+            if(!studentRepo.findByGender("FEMALE").isEmpty()){
+                return studentRepo.findByGender("FEMALE");
+            }
+        }catch (Exception e){
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
     }
 }
