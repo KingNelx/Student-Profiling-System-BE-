@@ -88,4 +88,14 @@ public class AdminController {
         return studentService.deleteStudentData(id);
     }
 
+    @GetMapping("/fetch-male")
+    public List <Student> fetchAllMales(){
+            return studentService.fetchAllMales();
+    }
+
+    @GetMapping("/fetch-female")
+    public List <Student> fetchAllFemales(){
+            return studentService.fetchAllFemales();
+    }
+
 }

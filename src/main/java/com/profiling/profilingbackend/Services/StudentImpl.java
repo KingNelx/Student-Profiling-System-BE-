@@ -145,4 +145,13 @@ public class StudentImpl implements StudentService {
         }
     }
 
+    @Override
+    public List <Student> fetchAllMales(){
+       return studentRepo.findByGender("MALE");
+    }
+
+    @Override
+    public List <Student> fetchAllFemales(){
+        return studentRepo.findByGender("FEMALE");
+    }
 }
