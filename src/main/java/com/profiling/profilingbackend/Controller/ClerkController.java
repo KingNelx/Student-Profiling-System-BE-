@@ -62,6 +62,11 @@ public class ClerkController {
 
     // STUDENT SERVICES
 
+    @PostMapping("/add-student")
+    public ResponseEntity <String> createStudents(Student newStudent){
+        return studentService.addNewStudent(newStudent);
+    }
+
     @GetMapping("/get-student")
     public List <Student> getStudents(){
         return studentService.queryAllStudents();
