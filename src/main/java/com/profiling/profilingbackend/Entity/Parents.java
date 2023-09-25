@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "Parents")
+
 public class  Parents {
 
     @Id
