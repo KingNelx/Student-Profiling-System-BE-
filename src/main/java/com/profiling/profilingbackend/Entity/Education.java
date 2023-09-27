@@ -9,7 +9,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDate;
-
+import java.time.format.DateTimeFormatter;
 @Document(collection = "Education")
 @Entity
 @AllArgsConstructor
@@ -32,6 +32,14 @@ public class Education {
     @Column(nullable = false)
     private @Getter @Setter LocalDate dateStarted;
 
+    public String getFormattedDateStarted() {
+        if (dateStarted != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
+            return dateStarted.format(formatter);
+        } else {
+            return ""; // Or you can return null or any other default value.
+        }
+    }
     @Column(nullable = false)
     private @Getter @Setter LocalDate expectedGraduationYear;
 

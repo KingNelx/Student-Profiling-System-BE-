@@ -35,7 +35,6 @@ public class AdminController {
         return adminService.logInAsAdmin(email, userName, password);
     }
 
-
     @PostMapping("/create-admin-account")
     public ResponseEntity <String> createAdminAccount(@RequestBody Admin admin){
         return adminService.createAdminAccount(admin);
