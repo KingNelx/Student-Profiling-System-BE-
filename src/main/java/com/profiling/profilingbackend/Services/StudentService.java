@@ -1,5 +1,6 @@
 package com.profiling.profilingbackend.Services;
 
+import com.profiling.profilingbackend.Entity.Education;
 import com.profiling.profilingbackend.Entity.Student;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,4 +21,6 @@ public interface StudentService {
 
     List <Student> fetchAllMales();
     List <Student> fetchAllFemales();
+
+//    List <Education> fetchAllElementary();
 }

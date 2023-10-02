@@ -168,4 +168,16 @@ public class StudentImpl implements StudentService {
         }
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
     }
+
+//    @Override
+//    public List <Education> fetchAllElementary(){
+//        try{
+//            if(!studentRepo.findByEducationLevel("ELEMENTARY").isEmpty()){
+//                return studentRepo.findByEducationLevel("ELEMENTARY");
+//            }
+//        }catch(Exception e){
+//            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//        throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+//    }
 }

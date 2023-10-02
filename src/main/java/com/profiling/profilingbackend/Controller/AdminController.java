@@ -1,6 +1,7 @@
 package com.profiling.profilingbackend.Controller;
 
 import com.profiling.profilingbackend.Entity.Admin;
+import com.profiling.profilingbackend.Entity.Education;
 import com.profiling.profilingbackend.Entity.Student;
 import com.profiling.profilingbackend.Services.AdminService;
 import com.profiling.profilingbackend.Services.StudentService;
@@ -96,5 +97,10 @@ public class AdminController {
     public List <Student> fetchAllFemales(){
             return studentService.fetchAllFemales();
     }
+
+//    @GetMapping("/fetch-elementary")
+//    public List <Education> fetchAllElementary(){
+//            return studentService.fetchAllElementary();
+//    }
 
 }
