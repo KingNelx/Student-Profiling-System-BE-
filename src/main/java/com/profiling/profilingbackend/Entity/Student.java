@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Document(collection = "Student")
 @Entity
@@ -53,4 +54,13 @@ public class Student {
 
     @DBRef
     private @Getter @Setter Parents parents;
+
+    public String getFormattedDateOfBirth(){
+        if(dateOfBirth != null){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
+            return dateOfBirth.format(formatter);
+        }else{
+            return "";
+        }
+    }
 }

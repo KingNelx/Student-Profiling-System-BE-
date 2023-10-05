@@ -4,6 +4,7 @@ import com.profiling.profilingbackend.Entity.Admin;
 import com.profiling.profilingbackend.Entity.Education;
 import com.profiling.profilingbackend.Entity.Student;
 import com.profiling.profilingbackend.Services.AdminService;
+import com.profiling.profilingbackend.Services.EducationService;
 import com.profiling.profilingbackend.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,9 @@ public class AdminController {
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private EducationService educationService;
 
         @GetMapping("/admin-login")
     public ResponseEntity <String> adminLogIn(String email, String userName, String password){
@@ -98,9 +102,29 @@ public class AdminController {
             return studentService.fetchAllFemales();
     }
 
-//    @GetMapping("/fetch-elementary")
-//    public List <Education> fetchAllElementary(){
-//            return studentService.fetchAllElementary();
-//    }
+    @GetMapping("/fetch-elementary")
+    public List <Education> fetchAllElementary(){
+            return educationService.fetchAllElementary();
+    }
+
+    @GetMapping("/fetch-high-school")
+    public List <Education> fetchAllHighSchool(){
+            return educationService.fetchAllHighSchool();
+    }
+
+    @GetMapping("/fetch-senior-high")
+    public List <Education> fetchALlSeniorHigh(){
+            return educationService.fetchAllSeniorHigh();
+    }
+
+    @GetMapping("/fetch-vocational")
+    public List <Education> fetchVocational(){
+            return educationService.fetchAllVocational();
+    }
+
+    @GetMapping("/fetch-college")
+    public List <Education> fetchCollege(){
+            return educationService.fetchAllCollege();
+    }
 
 }

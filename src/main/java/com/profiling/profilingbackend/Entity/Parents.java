@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @AllArgsConstructor
@@ -71,5 +72,25 @@ public class  Parents {
 
     @Column(nullable = false)
     private @Getter @Setter LocalDate mothersDateOfBirth;
+
+
+    public String getFormatterFathersDateOfBirth(){
+        if(fathersDateOfBirth != null){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
+            return fathersDateOfBirth.format(formatter);
+        }else{
+            return "";
+        }
+    }
+
+
+    public String getFormatterMothersDateOfBirth(){
+        if(mothersDateOfBirth != null){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
+            return mothersDateOfBirth.format(formatter);
+        }else{
+            return "";
+        }
+    }
 
 }

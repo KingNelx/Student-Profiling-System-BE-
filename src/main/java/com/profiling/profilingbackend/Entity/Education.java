@@ -40,8 +40,19 @@ public class Education {
             return ""; // Or you can return null or any other default value.
         }
     }
+
     @Column(nullable = false)
     private @Getter @Setter LocalDate expectedGraduationYear;
+
+    public String getFormattedExpectedGraduationYear(){
+        if(expectedGraduationYear != null){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
+            return expectedGraduationYear.format(formatter);
+        }else{
+            return "";
+        }
+    }
+
 
     @Column(nullable = false)
     private @Getter @Setter String schoolAddress;
