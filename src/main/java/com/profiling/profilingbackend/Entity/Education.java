@@ -20,40 +20,39 @@ public class Education {
     @Id
     private @Getter @Setter String id;
 
-    @Column(nullable = false)
+    //    @Column(nullable=false)
     private @Getter @Setter String educationLevel;
 
-    @Column(nullable = false)
+    //    @Column(nullable=false)
     private @Getter @Setter String schoolName;
 
-    @Column(nullable = false)
+    //    @Column(nullable=false)
     private @Getter @Setter String gradeLevel;
 
-    @Column(nullable = false)
-    private @Getter @Setter LocalDate dateStarted;
+    //    @Column(nullable=false)
+    private @Getter @Setter String dateStarted;
 
-    public String getFormattedDateStarted() {
-        if (dateStarted != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
-            return dateStarted.format(formatter);
-        } else {
-            return ""; // Or you can return null or any other default value.
-        }
-    }
-
-    @Column(nullable = false)
+//    public String getFormattedDateStarted() {
+//        if (dateStarted != null) {
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
+//            return dateStarted.format(formatter);
+//        } else {
+//            return ""; // Or you can return null or any other default value.
+//        }
+//    }
+//
+//    @Column(nullable=false)
     private @Getter @Setter LocalDate expectedGraduationYear;
+//
+//    public String getFormattedExpectedGraduationYear(){
+//        if(expectedGraduationYear != null){
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
+//            return expectedGraduationYear.format(formatter);
+//        }else{
+//            return "";
+//        }
+//    }
 
-    public String getFormattedExpectedGraduationYear(){
-        if(expectedGraduationYear != null){
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
-            return expectedGraduationYear.format(formatter);
-        }else{
-            return "";
-        }
-    }
-
-
-    @Column(nullable = false)
+    //    @Column(nullable=false)
     private @Getter @Setter String schoolAddress;
 }

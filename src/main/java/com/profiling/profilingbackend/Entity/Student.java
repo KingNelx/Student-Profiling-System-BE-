@@ -22,45 +22,47 @@ public class Student {
     @Id
     private @Getter @Setter String id;
 
-    @Column(nullable=false)
+    //    @Column(nullable=false)
     private @Getter @Setter String studentID;
 
-    @Column(nullable=false)
+    //    @Column(nullable=false)
     private @Getter @Setter String firstName;
 
-    @Column(nullable = false)
+    //    @Column(nullable=false)
     private @Getter @Setter String lastName;
 
-    @Column(nullable=false)
+    //    @Column(nullable=false)
     private @Getter @Setter String middleInitial;
 
-    @Column(nullable=false)
-    private @Getter @Setter LocalDate dateOfBirth;
+    //    @Column(nullable=false)
+    private @Getter @Setter String dateOfBirth;
 
-    @Column(nullable = false)
+    //    @Column(nullable=false)
     private @Getter @Setter String gender;
 
-    @Column(nullable=false)
+    //    @Column(nullable=false)
     private @Getter @Setter String contactNumber;
 
-    @Column(nullable=false)
+    //    @Column(nullable=false)
     private @Getter @Setter String emailAddress;
 
-    @Column(nullable = false)
+    //    @Column(nullable=false)
     private @Getter @Setter String address;
 
+    //    @Column(nullable=false)
     @DBRef
     private @Getter @Setter Education education;
 
+    //    @Column(nullable=false)
     @DBRef
     private @Getter @Setter Parents parents;
 
-    public String getFormattedDateOfBirth(){
-        if(dateOfBirth != null){
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
-            return dateOfBirth.format(formatter);
-        }else{
-            return "";
-        }
-    }
+//    public String getFormattedDateOfBirth(){
+//        if(dateOfBirth != null){
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yy");
+//            return dateOfBirth.format(formatter);
+//        }else{
+//            return "";
+//        }
+//    }
 }
