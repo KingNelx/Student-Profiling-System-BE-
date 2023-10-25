@@ -32,50 +32,50 @@ public class StudentImpl implements StudentService {
 
     @Transactional
     @Override
-    public ResponseEntity <String> addNewStudent(@RequestBody Student student) {
+    public ResponseEntity<String> addNewStudent(@RequestBody Student student) {
 
         Education education = student.getEducation();
         Parents parents = student.getParents();
-        Optional <Student> existingID = studentRepo.findByStudentID(student.getStudentID());
+        Optional<Student> existingID = studentRepo.findByStudentID(student.getStudentID());
 
-        if(existingID.isPresent()){
+        if (existingID.isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(" CURRENT DATA ALREADY SAVED ");
         }
-        try{
-            if(education == null || education.getId() == null || parents == null || parents.getId() == null){
+        try {
+            if (education == null || education.getId() == null || parents == null || parents.getId() == null) {
                 educationRepo.save(education);
                 parentRepo.save(parents);
                 studentRepo.save(student);
                 return ResponseEntity.status(HttpStatus.OK).body(" NEW STUDENT ADDED ");
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
         throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-        @Override
-    public List <Student> queryAllStudents(){
-        if(studentRepo.findAll().isEmpty()){
+    @Override
+    public List<Student> queryAllStudents() {
+        if (studentRepo.findAll().isEmpty()) {
             throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
         }
         return studentRepo.findAll();
     }
 
     @Override
-    public Optional <Student> getStudentByID(@PathVariable String id){
-        if(studentRepo.findById(id).isEmpty()){
+    public Optional<Student> getStudentByID(@PathVariable String id) {
+        if (studentRepo.findById(id).isEmpty()) {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
         return studentRepo.findById(id);
     }
 
     @Override
-    public ResponseEntity <String> deleteStudentData(@PathVariable String id){
+    public ResponseEntity<String> deleteStudentData(@PathVariable String id) {
 
-        Optional <Student> studentDataHandler = studentRepo.findById(id);
+        Optional<Student> studentDataHandler = studentRepo.findById(id);
 
-        if(studentDataHandler.isEmpty()){
+        if (studentDataHandler.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(" DATA DOES NOT EXIST ");
         }
 
@@ -89,10 +89,10 @@ public class StudentImpl implements StudentService {
 
     @Override
     @Transactional
-    public ResponseEntity <String> updateStudentData(@PathVariable String id, @RequestBody Student newData){
-        try{
+    public ResponseEntity<String> updateStudentData(@PathVariable String id, @RequestBody Student newData) {
+        try {
             Student studentData = studentRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
-            if(studentData != null){
+            if (studentData != null) {
                 studentData.setStudentID(newData.getStudentID());
                 studentData.setFirstName(newData.getFirstName());
                 studentData.setLastName(newData.getLastName());
@@ -104,7 +104,7 @@ public class StudentImpl implements StudentService {
                 studentData.setAddress(newData.getAddress());
 
                 Education educationData = studentData.getEducation();
-                if(educationData != null && educationData.getId() != null){
+                if (educationData != null && educationData.getId() != null) {
                     educationData.setEducationLevel(newData.getEducation().getEducationLevel());
                     educationData.setSchoolName(newData.getEducation().getSchoolName());
                     educationData.setGradeLevel(newData.getEducation().getGradeLevel());
@@ -114,7 +114,7 @@ public class StudentImpl implements StudentService {
                 }
 
                 Parents parentsData = studentData.getParents();
-                if(parentsData != null && parentsData.getId() != null){
+                if (parentsData != null && parentsData.getId() != null) {
                     parentsData.setFathersFullName(newData.getParents().getFathersFullName());
                     parentsData.setFathersAge(newData.getParents().getFathersAge());
                     parentsData.setFathersAddress(newData.getParents().getFathersAddress());
@@ -139,45 +139,34 @@ public class StudentImpl implements StudentService {
 
                 return ResponseEntity.status(HttpStatus.OK).body(" STUDENT DATA UPDATED ");
             }
-            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(" AN ERROR OCCURRED ");
-        }catch (Exception e){
-            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(" AN ERROR OCCURRED ");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
     @Override
-    public List <Student> fetchAllMales(){
-      try{
-          if(!studentRepo.findByGender("MALE").isEmpty()){
-              return studentRepo.findByGender("MALE");
-          }
-      }catch (Exception e){
-          throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
-      }
-      throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
-    }
-
-    @Override
-    public List <Student> fetchAllFemales(){
-        try{
-            if(!studentRepo.findByGender("FEMALE").isEmpty()){
-                return studentRepo.findByGender("FEMALE");
+    public List<Student> fetchAllMales() {
+        try {
+            if (!studentRepo.findByGender("MALE").isEmpty()) {
+                return studentRepo.findByGender("MALE");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
     }
 
-//    @Override
-//    public List <Education> fetchAllElementary(){
-//        try{
-//            if(!studentRepo.findByEducationLevel("ELEMENTARY").isEmpty()){
-//                return studentRepo.findByEducationLevel("ELEMENTARY");
-//            }
-//        }catch(Exception e){
-//            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//        throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
-//    }
+    @Override
+    public List<Student> fetchAllFemales() {
+        try {
+            if (!studentRepo.findByGender("FEMALE").isEmpty()) {
+                return studentRepo.findByGender("FEMALE");
+            }
+        } catch (Exception e) {
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+    }
+
 }

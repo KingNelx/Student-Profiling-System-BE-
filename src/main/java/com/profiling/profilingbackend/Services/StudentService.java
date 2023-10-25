@@ -21,6 +21,4 @@ public interface StudentService {
 
     List <Student> fetchAllMales();
     List <Student> fetchAllFemales();
-
-//    List <Education> fetchAllElementary();
 }

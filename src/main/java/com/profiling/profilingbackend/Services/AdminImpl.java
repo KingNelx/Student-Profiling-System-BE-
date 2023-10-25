@@ -21,29 +21,35 @@ public class AdminImpl implements AdminService {
 
     @Override
     public ResponseEntity <String> createAdminAccount(@RequestBody Admin createAccount){
-        Optional <Admin> existingEmail = adminRepo.findByEmail(createAccount.getEmail());
-        Optional <Admin> existingLastName = adminRepo.findByLastName(createAccount.getLastName());
+       try{
+           Optional <Admin> existingEmail = adminRepo.findByEmail(createAccount.getEmail());
+           Optional <Admin> existingLastName = adminRepo.findByLastName(createAccount.getLastName());
 
-       if(existingEmail.isEmpty() || existingLastName.isEmpty()){
-           adminRepo.save(createAccount);
-           return ResponseEntity.status(HttpStatus.OK).body(" ADMIN ACCOUNT CREATED ");
+           if(existingEmail.isEmpty() || existingLastName.isEmpty()) {
+               adminRepo.save(createAccount);
+               return ResponseEntity.status(HttpStatus.OK).body(" ADMIN ACCOUNT CREATED ");
+           }
+       }catch(Exception e){
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(" ADMIN ACCOUNT ALREADY EXISTED");
        }
-
-       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(" ADMIN ACCOUNT ALREADY EXISTED");
+       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(" SOMETHING WENT WRONG ");
     }
 
     @Override
     public List <Admin> queryAllAdmins(){
-        if(adminRepo.findAll().isEmpty()){
+        try{
+            if(!adminRepo.findAll().isEmpty()){
+                return adminRepo.findAll();
+            }
+        }catch(Exception e){
             throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
         }
-        return adminRepo.findAll();
+        throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override
     public Optional <Admin> queryAdminByID(@PathVariable String id){
         boolean doesExist = adminRepo.findById(id).isPresent();
-
         if(!doesExist){
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }

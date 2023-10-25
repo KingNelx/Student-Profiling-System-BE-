@@ -102,29 +102,5 @@ public class AdminController {
             return studentService.fetchAllFemales();
     }
 
-    @GetMapping("/fetch-elementary")
-    public List <Education> fetchAllElementary(){
-            return educationService.fetchAllElementary();
-    }
-
-    @GetMapping("/fetch-high-school")
-    public List <Education> fetchAllHighSchool(){
-            return educationService.fetchAllHighSchool();
-    }
-
-    @GetMapping("/fetch-senior-high")
-    public List <Education> fetchALlSeniorHigh(){
-            return educationService.fetchAllSeniorHigh();
-    }
-
-    @GetMapping("/fetch-vocational")
-    public List <Education> fetchVocational(){
-            return educationService.fetchAllVocational();
-    }
-
-    @GetMapping("/fetch-college")
-    public List <Education> fetchCollege(){
-            return educationService.fetchAllCollege();
-    }
 
 }

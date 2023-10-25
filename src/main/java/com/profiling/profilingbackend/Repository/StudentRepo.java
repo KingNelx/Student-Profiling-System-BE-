@@ -12,5 +12,4 @@ public interface StudentRepo extends MongoRepository <Student, String> {
     Optional <Student> findByStudentID(String studentID);
     List <Student> findByGender(String gender);
 
-
 }
