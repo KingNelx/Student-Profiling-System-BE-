@@ -22,7 +22,7 @@ public class Student {
     @Id
     private @Getter @Setter String id;
 
-        @Column(nullable=false)
+    @Column(nullable=false)
     private @Getter @Setter String studentID;
 
     @Column(nullable=false)
