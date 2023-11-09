@@ -28,22 +28,22 @@ public class AdminImpl implements AdminService {
                 return ResponseEntity.status(HttpStatus.OK).body(" ADMIN ACCOUNT CREATED ");
             }
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage() + " ADMIN ALREADY EXISTED ");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage() + " SOMETHING WENT WRONG ");
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(" SOMETHING WENT WRONG ");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(" ADMIN ALREADY EXISTED ");
     }
 
     @Override
     public ResponseEntity <String> adminLogIn(@RequestParam String email, @RequestParam String userName, @RequestParam String password, @RequestParam String specialCharacters){
         Admin existingAccount = adminRepo.findByEmailAndUserNameAndPasswordAndSpecialCharacters(email, userName, password, specialCharacters);
         try{
-            if(existingAccount == null){
+            if(existingAccount != null){
                 return ResponseEntity.status(HttpStatus.OK).body(" SUCCESSFULLY LOGIN ");
             }
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage() + " ACCOUNT DOES NOT EXIST ");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage() + " SOMETHING WENT WRONG ");
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(" SOMETHING WENT WRONG ");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(" ACCOUNT DOES NOT EXIST ");
     }
 
 }
