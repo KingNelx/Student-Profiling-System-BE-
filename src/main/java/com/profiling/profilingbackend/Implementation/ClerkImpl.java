@@ -44,7 +44,7 @@ public class ClerkImpl implements ClerkService {
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(" SOMETHING WENT WRONG " + e.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(" CLERK ACCOUNT ");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(" CLERK ACCOUNT DOES NOT EXIST ");
     }
 
     @Override
@@ -87,5 +87,17 @@ public class ClerkImpl implements ClerkService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(" SOMETHING WENT WRONG " + e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(" DATA DOES NOT EXIST ");
+    }
+
+    @Override
+    public Optional <Clerk> queryClerkByID(String id){
+        try{
+            if(clerkRepo.findById(id).isPresent()){
+                return clerkRepo.findById(id);
+            }
+        }catch(Exception e){
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+        throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
     }
 }

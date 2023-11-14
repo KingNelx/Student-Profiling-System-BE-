@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/clerk")
@@ -46,6 +47,11 @@ public class ClerkController {
     @DeleteMapping("/delete-data/{id}")
     public ResponseEntity <String> deleteClerkData(@PathVariable String id){
         return clerkService.deleteClerksData(id);
+    }
+
+    @GetMapping("/query-data/{id}")
+    public Optional <Clerk> queryClerkByID(@PathVariable String id){
+        return clerkService.queryClerkByID(id);
     }
 
 }
