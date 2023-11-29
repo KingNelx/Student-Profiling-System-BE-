@@ -23,7 +23,6 @@ public class ClerkImpl implements ClerkService {
     public ResponseEntity <String> createAccount(@RequestBody Clerk clerk){
         Optional <Clerk> existingUserName = clerkRepo.findByUserName(clerk.getUserName());
         Optional <Clerk> existingEmail = clerkRepo.findByEmail(clerk.getEmail());
-
         try{
             if(existingUserName.isEmpty() && existingEmail.isEmpty()){
                 clerkRepo.save(clerk);
@@ -38,20 +37,22 @@ public class ClerkImpl implements ClerkService {
 
     @Override
     public List <Clerk> queryClerks(){
+        List <Clerk> allClerks = clerkRepo.findAll();
         try{
-            if(!clerkRepo.findAll().isEmpty()){
+            if(!allClerks.isEmpty()){
                 return clerkRepo.findAll();
             }else{
                 throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
             }
         }catch(Exception e) {
-            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, " SOMETHING WENT WRONG " + e.getMessage())
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, " SOMETHING WENT WRONG " + e.getMessage());
         }
     }
     @Override
     public Optional <Clerk> queryClerkById(@PathVariable String id){
+        Optional <Clerk> clerkID = clerkRepo.findById(id);
         try{
-            if(clerkRepo.findById(id).isPresent()){
+            if(clerkID.isPresent()){
                 return clerkRepo.findById(id);
             }else{
                 throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
@@ -64,7 +65,6 @@ public class ClerkImpl implements ClerkService {
     @Override
    public ResponseEntity <String> updateClerkData(@PathVariable String id, @RequestBody Clerk clerk) {
         Clerk existingAccount = clerkRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
-
         if (clerk == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(" ENTITY MUST NOT BE NULL ");
         }
