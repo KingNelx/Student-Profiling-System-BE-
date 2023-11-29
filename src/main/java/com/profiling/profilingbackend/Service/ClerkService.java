@@ -13,6 +13,6 @@ public interface ClerkService {
     Optional <Clerk> queryClerkById(String id);
     ResponseEntity <String> updateClerkData(String id, Clerk updateData);
     ResponseEntity <String> deleteClerkData(String id);
-    ResponseEntity <String> logAsClerk(String email, String userName, String password, String confirmPassword);
+    ResponseEntity <String> logInAsClerk(String email, String userName, String password);
 
 }
