@@ -62,4 +62,19 @@ public class ClerkController {
     public ResponseEntity <String> addNewStudent(@RequestBody Student student){
         return studentService.addNewStudent(student);
     }
+
+    @GetMapping("/student/queryAll")
+    public List <Student> queryStudents(){
+        return studentService.allStudents();
+    }
+
+    @GetMapping("/student/queryByID/{id}")
+    public Optional <Student> queryStudentByID(@PathVariable String id){
+        return studentService.queryStudentByID(id);
+    }
+
+    @DeleteMapping("/student/remove-data/{id}")
+    public ResponseEntity <String> removeStudentData(@PathVariable String id){
+        return studentService.removeStudentData(id);
+    }
 }

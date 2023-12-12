@@ -1,7 +1,6 @@
 package com.profiling.profilingbackend.Implementation;
 import java.util.List;
 import java.util.Optional;
-
 import com.profiling.profilingbackend.Entity.Course;
 import com.profiling.profilingbackend.Entity.Student;
 import com.profiling.profilingbackend.Repository.CourseRepo;
@@ -12,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.client.HttpClientErrorException;
 
 @Service
 public class StudentImpl implements StudentService {
@@ -57,4 +58,51 @@ public class StudentImpl implements StudentService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(" SOMETHING WENT WRONG " + e.getCause());
         }
     }
+
+    @Override
+    public List <Student> allStudents(){
+        List <Student> allStudents = studentRepo.findAll();
+        try{
+            if(!allStudents.isEmpty()){
+                return allStudents;
+            }
+        }catch (Exception e){
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, " SOMETHING WENT WRONG " + e.getCause());
+        }
+        throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+    }
+
+    @Override
+    public Optional <Student> queryStudentByID(@PathVariable String id){
+        Optional <Student> studentID = studentRepo.findById(id);
+        try{
+            if(studentID.isPresent()){
+                return studentID;
+            }
+        }catch(Exception e){
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, " SOMETHING WENT WRONG " + e.getCause());
+        }
+        throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+    }
+
+    @Override
+    public ResponseEntity <String> removeStudentData(@PathVariable String id){
+        Optional <Student> existingID = studentRepo.findById(id);
+        try{
+            if(existingID.isEmpty()){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(" STUDENT NOT FOUND ");
+            }
+            Student student = existingID.get();
+            List <Course> myCourse = student.getMyCourse();
+            studentRepo.deleteById(id);
+            for(Course course : myCourse){
+                courseRepo.deleteById(course.getId());
+            }
+            return ResponseEntity.ok("Student and associated courses deleted successfully");
+        }catch (Exception e){
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, " SOMETHING WENT WRONG " + e.getCause());
+        }
+    }
 }
+
+

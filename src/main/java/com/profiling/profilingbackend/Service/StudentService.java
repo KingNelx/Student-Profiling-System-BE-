@@ -10,7 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public interface StudentService {
 
-    // add new student
     @Transactional
     ResponseEntity <String> addNewStudent(Student student);
+
+    List <Student> allStudents();
+
+    Optional <Student> queryStudentByID(String id);
+
+    ResponseEntity <String> removeStudentData(String id);
 }
+
