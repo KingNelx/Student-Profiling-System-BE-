@@ -18,5 +18,6 @@ public interface StudentService {
     Optional <Student> queryStudentByID(String id);
 
     ResponseEntity <String> removeStudentData(String id);
+    ResponseEntity <String> updateStudentData(Student student, String id);
 }
 

@@ -103,6 +103,30 @@ public class StudentImpl implements StudentService {
             throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, " SOMETHING WENT WRONG " + e.getCause());
         }
     }
+
+    @Override
+    public ResponseEntity <String> updateStudentData(@RequestBody Student student, @PathVariable String id){
+        Student existingID = studentRepo.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+
+        try{
+            if(existingID != null){
+             existingID.setFirstName(student.getFirstName());
+             existingID.setMiddleInitial(student.getMiddleInitial());
+             existingID.setLastName(student.getLastName());
+             existingID.setDateOfBirth(student.getDateOfBirth());
+             existingID.setGender(student.getGender());
+             existingID.setTemporaryAddress(student.getTemporaryAddress());
+             existingID.setPermanentAddress(student.getPermanentAddress());
+             existingID.setContactInformation(student.getContactInformation());
+             existingID.setAcademicLevel(student.getAcademicLevel());
+             studentRepo.save(existingID);
+             return ResponseEntity.status(HttpStatus.OK).body(" UPDATED SUCCESSFULLY ");
+            }
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(" SOMETHING WENT WRONG " + e.getCause());
+        }
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(" STUDENT NOT FOUND ");
+    }
 }
 
 

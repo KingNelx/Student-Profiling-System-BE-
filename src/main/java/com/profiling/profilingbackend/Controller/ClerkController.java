@@ -74,7 +74,12 @@ public class ClerkController {
     }
 
     @DeleteMapping("/student/remove-data/{id}")
-    public ResponseEntity <String> removeStudentData(@PathVariable String id){
+    public ResponseEntity <String> removeStudentData(@PathVariable     String id){
         return studentService.removeStudentData(id);
+    }
+
+    @PutMapping("/student/update-data/{id}")
+    public ResponseEntity <String> updateStudentData(@RequestBody Student student, @PathVariable String id){
+        return studentService.updateStudentData(student, id);
     }
 }
