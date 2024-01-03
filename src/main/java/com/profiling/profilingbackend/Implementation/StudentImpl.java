@@ -127,6 +127,36 @@ public class StudentImpl implements StudentService {
         }
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(" STUDENT NOT FOUND ");
     }
+
+    @Override
+    public List <Student> queryAllMales(){
+        List <Student> males = studentRepo.findByGender("MALE");
+
+        try{
+            if(males.isEmpty()){
+                throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " THERE ARE NO STUDENTS AVAILABLE ");
+            }else {
+                return males;
+            }
+        }catch (Exception e){
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, " SOMETHING WENT WRONG " + e.getCause());
+        }
+    }
+
+    @Override
+    public List <Student> queryAllFemales(){
+        List <Student> females = studentRepo.findByGender("FEMALE");
+
+        try{
+            if(females.isEmpty()){
+                throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " THERE ARE NO STUDENTS AVAILABLE ");
+            }else{
+                return females;
+            }
+        }catch (Exception e){
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, " SOMETHING WENT WRONG " + e.getCause());
+        }
+    }
 }
 
 

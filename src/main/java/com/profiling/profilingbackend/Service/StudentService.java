@@ -19,5 +19,9 @@ public interface StudentService {
 
     ResponseEntity <String> removeStudentData(String id);
     ResponseEntity <String> updateStudentData(Student student, String id);
+
+    List <Student> queryAllMales();
+
+    List <Student> queryAllFemales();
 }
 

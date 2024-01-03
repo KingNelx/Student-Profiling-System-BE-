@@ -84,4 +84,14 @@ public class ClerkController {
     public ResponseEntity <String> updateStudentData(@RequestBody Student student, @PathVariable String id){
         return studentService.updateStudentData(student, id);
     }
+
+    @GetMapping("/student/gender/males")
+    public List <Student> queryMales(){
+        return studentService.queryAllMales();
+    }
+
+    @GetMapping("/student/gender/females")
+    public List <Student> queryFemales(){
+        return studentService.queryAllFemales();
+    }
 }
