@@ -94,4 +94,24 @@ public class ClerkController {
     public List <Student> queryFemales(){
         return studentService.queryAllFemales();
     }
+
+    @GetMapping("/student/academic-level/freshman")
+    public List <Student> queryFreshman(){
+        return studentService.queryFreshman();
+    }
+
+    @GetMapping("/student/academic-level/sophomore")
+    public List <Student> querySophomore(){
+        return studentService.querySophomore();
+    }
+
+    @GetMapping("/student/academic-level/junior")
+    public List <Student> queryJunior(){
+        return studentService.queryJunior();
+    }
+
+    @GetMapping("/student/academic-level/senior")
+    public List <Student> querySenior(){
+        return studentService.querySenior();
+    }
 }

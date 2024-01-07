@@ -23,5 +23,10 @@ public interface StudentService {
     List <Student> queryAllMales();
 
     List <Student> queryAllFemales();
+
+    List <Student> queryFreshman();
+    List <Student> querySophomore();
+    List <Student> queryJunior();
+    List <Student> querySenior();
 }
 

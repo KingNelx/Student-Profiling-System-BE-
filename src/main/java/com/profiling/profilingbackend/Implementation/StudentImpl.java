@@ -157,6 +157,65 @@ public class StudentImpl implements StudentService {
             throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, " SOMETHING WENT WRONG " + e.getCause());
         }
     }
+
+    @Override
+    public List <Student> queryFreshman(){
+        List <Student> allFreshman = studentRepo.findByAcademicLevel("FRESHMAN");
+        try{
+            if(allFreshman.isEmpty()){
+                throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " NO DATA FOUND ");
+            }else{
+                return  allFreshman;
+            }
+        }catch (Exception e){
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, " SOMETHING WENT WRONG " + e.getCause());
+        }
+    }
+
+    @Override
+    public List <Student> querySophomore(){
+        List <Student> allSophomore = studentRepo.findByAcademicLevel("SOPHOMORE");
+
+        try{
+            if(allSophomore.isEmpty()){
+                throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " NO DATA FOUND ");
+            }else{
+                return allSophomore;
+            }
+        }catch (Exception e) {
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, " SOMETHING WENT WRONG " + e.getCause());
+        }
+    }
+
+    @Override
+    public List <Student> queryJunior(){
+        List <Student> allJunior = studentRepo.findByAcademicLevel("JUNIOR");
+
+        try{
+           if(allJunior.isEmpty()){
+               throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " NO DATA FOUND ");
+           }else{
+               return allJunior;
+           }
+        }catch (Exception e){
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, " SOMETHING WENT WRONG " + e.getCause());
+        }
+    }
+
+    @Override
+    public List <Student> querySenior(){
+        List <Student> allSenior = studentRepo.findByAcademicLevel("SENIOR");
+
+        try{
+            if(allSenior.isEmpty()){
+                throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " NO DATA FOUND ");
+            }else{
+                return allSenior;
+            }
+        }catch (Exception e){
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, " SOMETHING WENT WRONG " + e.getCause());
+        }
+    }
 }
 
 
