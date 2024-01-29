@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
+
 @RestController
 @RequestMapping("/clerk")
 @CrossOrigin(origins = "http://localhost:5173/")
@@ -30,88 +31,89 @@ public class ClerkController {
     private StudentService studentService;
 
     @PostMapping("/create-account")
-    public ResponseEntity <String> createAccount(@RequestBody Clerk clerk){
+    public ResponseEntity<String> createAccount(@RequestBody Clerk clerk) {
         return clerkService.createAccount(clerk);
     }
 
     @GetMapping("/queryAll")
-    public List <Clerk> queryClerks(){
+    public List<Clerk> queryClerks() {
         return clerkService.queryClerks();
     }
 
     @GetMapping("/query-clerk-id/{id}")
-    public Optional <Clerk> queryClerkById(@PathVariable String id){
+    public Optional<Clerk> queryClerkById(@PathVariable String id) {
         return clerkService.queryClerkById(id);
     }
 
     @PutMapping("/update-data/{id}")
-    public ResponseEntity <String> updateClerkData(@PathVariable String id, @RequestBody Clerk clerk){
+    public ResponseEntity<String> updateClerkData(@PathVariable String id, @RequestBody Clerk clerk) {
         return clerkService.updateClerkData(id, clerk);
     }
 
     @DeleteMapping("/delete-data/{id}")
-    public ResponseEntity <String> deleteClerkData(@PathVariable String id){
+    public ResponseEntity<String> deleteClerkData(@PathVariable String id) {
         return clerkService.deleteClerkData(id);
     }
 
     @GetMapping("/sign-in")
-    public ResponseEntity <String> logInAsClerk(@RequestParam String email, @RequestParam String userName, @RequestParam String password){
+    public ResponseEntity<String> logInAsClerk(@RequestParam String email, @RequestParam String userName,
+            @RequestParam String password) {
         return clerkService.logInAsClerk(email, userName, password);
     }
 
     // STUDENT
     @PostMapping("/student/add-new")
-    public ResponseEntity <String> addNewStudent(@RequestBody Student student){
+    public ResponseEntity<String> addNewStudent(@RequestBody Student student) {
         return studentService.addNewStudent(student);
     }
 
     @GetMapping("/student/queryAll")
-    public List <Student> queryStudents(){
+    public List<Student> queryStudents() {
         return studentService.allStudents();
     }
 
     @GetMapping("/student/queryByID/{id}")
-    public Optional <Student> queryStudentByID(@PathVariable String id){
+    public Optional<Student> queryStudentByID(@PathVariable String id) {
         return studentService.queryStudentByID(id);
     }
 
     @DeleteMapping("/student/remove-data/{id}")
-    public ResponseEntity <String> removeStudentData(@PathVariable     String id){
+    public ResponseEntity<String> removeStudentData(@PathVariable String id) {
         return studentService.removeStudentData(id);
     }
 
     @PutMapping("/student/update-data/{id}")
-    public ResponseEntity <String> updateStudentData(@RequestBody Student student, @PathVariable String id){
+    public ResponseEntity<String> updateStudentData(@RequestBody Student student, @PathVariable String id) {
         return studentService.updateStudentData(student, id);
     }
 
     @GetMapping("/student/gender/males")
-    public List <Student> queryMales(){
+    public List<Student> queryMales() {
         return studentService.queryAllMales();
     }
 
     @GetMapping("/student/gender/females")
-    public List <Student> queryFemales(){
+    public List<Student> queryFemales() {
         return studentService.queryAllFemales();
     }
 
     @GetMapping("/student/academic-level/freshman")
-    public List <Student> queryFreshman(){
+    public List<Student> queryFreshman() {
         return studentService.queryFreshman();
     }
 
     @GetMapping("/student/academic-level/sophomore")
-    public List <Student> querySophomore(){
+    public List<Student> querySophomore() {
         return studentService.querySophomore();
     }
 
     @GetMapping("/student/academic-level/junior")
-    public List <Student> queryJunior(){
+    public List<Student> queryJunior() {
         return studentService.queryJunior();
     }
 
     @GetMapping("/student/academic-level/senior")
-    public List <Student> querySenior(){
+    public List<Student> querySenior() {
         return studentService.querySenior();
     }
 }

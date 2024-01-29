@@ -15,6 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "Clerk")
 public class Clerk {
 
+    @Id
     private @Getter @Setter String id;
 
     @Column(nullable = false)

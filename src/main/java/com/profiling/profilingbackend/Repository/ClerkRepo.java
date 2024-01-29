@@ -4,10 +4,17 @@ import com.profiling.profilingbackend.Entity.Clerk;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
-@Repository
-public interface ClerkRepo extends MongoRepository <Clerk, String> {
 
-    Optional <Clerk> findByUserName(String userName);
-    Optional <Clerk> findByEmail(String email);
+@Repository
+public interface ClerkRepo extends MongoRepository<Clerk, String> {
+
+    Optional<Clerk> findByUserName(String userName);
+
+    Optional<Clerk> findByEmail(String email);
+
+    // Clerk findByPassword(String password);
+
+    // Clerk findByConfirmPassword(String confirmPassword);
+
     Clerk findByEmailAndUserNameAndPassword(String email, String userName, String password);
 }
