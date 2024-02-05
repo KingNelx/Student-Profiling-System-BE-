@@ -11,22 +11,32 @@ import org.springframework.transaction.annotation.Transactional;
 public interface StudentService {
 
     @Transactional
-    ResponseEntity <String> addNewStudent(Student student);
+    ResponseEntity<String> addNewStudent(Student student);
 
-    List <Student> allStudents();
+    List<Student> allStudents();
 
-    Optional <Student> queryStudentByID(String id);
+    Optional<Student> queryStudentByID(String id);
 
-    ResponseEntity <String> removeStudentData(String id);
-    ResponseEntity <String> updateStudentData(Student student, String id);
+    ResponseEntity<String> removeStudentData(String id);
 
-    List <Student> queryAllMales();
+    ResponseEntity<String> updateStudentData(Student student, String id);
 
-    List <Student> queryAllFemales();
+    List<Student> queryAllMales();
 
-    List <Student> queryFreshman();
-    List <Student> querySophomore();
-    List <Student> queryJunior();
-    List <Student> querySenior();
+    List<Student> queryAllFemales();
+
+    List<Student> queryFreshman();
+
+    List<Student> querySophomore();
+
+    List<Student> queryJunior();
+
+    List<Student> querySenior();
+
+    Long totalStudentCount();
+
+    Long totalMaleCount();
+
+    Long totalFemaleCount();
+
 }
-

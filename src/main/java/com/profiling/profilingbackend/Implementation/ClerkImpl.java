@@ -122,4 +122,6 @@ public class ClerkImpl implements ClerkService {
                     .body(" SOMETHING WENT WRONG " + e.getCause());
         }
     }
+
+
 }

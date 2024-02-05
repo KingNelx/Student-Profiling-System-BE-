@@ -116,4 +116,19 @@ public class ClerkController {
     public List<Student> querySenior() {
         return studentService.querySenior();
     }
+
+    @GetMapping("/student/total-enrolled")
+    public Long Count() {
+        return studentService.totalStudentCount();
+    }
+
+    @GetMapping("/student/total/male")
+    public Long maleCount() {
+        return studentService.totalMaleCount();
+    }
+
+    @GetMapping("/student/total/female")
+    public Long femaleCount() {
+        return studentService.totalFemaleCount();
+    }
 }
