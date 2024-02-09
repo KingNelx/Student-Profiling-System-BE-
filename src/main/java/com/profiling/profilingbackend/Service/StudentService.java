@@ -33,6 +33,8 @@ public interface StudentService {
 
     List<Student> querySenior();
 
+    List<Student> queryIrregular();
+
     Long totalStudentCount();
 
     Long totalMaleCount();

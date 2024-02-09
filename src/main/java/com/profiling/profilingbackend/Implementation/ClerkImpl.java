@@ -98,13 +98,12 @@ public class ClerkImpl implements ClerkService {
             if (clerkRepo.findById(id).isPresent()) {
                 clerkRepo.deleteById(id);
                 return ResponseEntity.status(HttpStatus.OK).body(" CLERK DATA DELETED ");
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(" DATA DOES NOT EXIST ");
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(" SOMETHING WENT WRONG " + e.getMessage());
         }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(" DATA DOES NOT EXIST ");
     }
 
     @Override
@@ -114,14 +113,12 @@ public class ClerkImpl implements ClerkService {
         try {
             if (existingAccount != null) {
                 return ResponseEntity.status(HttpStatus.OK).body(" SUCCESSFULLY LOG IN ");
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(" ACCOUNT DOES NOT EXIST ");
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(" SOMETHING WENT WRONG " + e.getCause());
         }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(" ACCOUNT DOES NOT EXIST ");
     }
-
 
 }

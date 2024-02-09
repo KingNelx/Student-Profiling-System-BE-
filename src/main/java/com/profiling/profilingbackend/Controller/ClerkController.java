@@ -117,6 +117,11 @@ public class ClerkController {
         return studentService.querySenior();
     }
 
+    @GetMapping("/student/academic-level/irregular")
+    public List<Student> queryIrregular() {
+        return studentService.queryIrregular();
+    }
+
     @GetMapping("/student/total-enrolled")
     public Long Count() {
         return studentService.totalStudentCount();

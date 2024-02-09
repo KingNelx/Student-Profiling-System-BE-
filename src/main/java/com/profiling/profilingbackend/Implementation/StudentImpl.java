@@ -141,15 +141,15 @@ public class StudentImpl implements StudentService {
         List<Student> males = studentRepo.findByGender("MALE");
 
         try {
-            if (males.isEmpty()) {
-                throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " THERE ARE NO STUDENTS AVAILABLE ");
-            } else {
+            if (!males.isEmpty()) {
                 return males;
             }
         } catch (Exception e) {
             throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR,
                     " SOMETHING WENT WRONG " + e.getCause());
         }
+        throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " THERE ARE NO STUDENTS AVAILABLE ");
+
     }
 
     @Override
@@ -157,30 +157,28 @@ public class StudentImpl implements StudentService {
         List<Student> females = studentRepo.findByGender("FEMALE");
 
         try {
-            if (females.isEmpty()) {
-                throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " THERE ARE NO STUDENTS AVAILABLE ");
-            } else {
+            if (!females.isEmpty()) {
                 return females;
             }
         } catch (Exception e) {
             throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR,
                     " SOMETHING WENT WRONG " + e.getCause());
         }
+        throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " THERE ARE NO STUDENTS AVAILABLE ");
     }
 
     @Override
     public List<Student> queryFreshman() {
         List<Student> allFreshman = studentRepo.findByAcademicLevel("FRESHMAN");
         try {
-            if (allFreshman.isEmpty()) {
-                throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " NO DATA FOUND ");
-            } else {
+            if (!allFreshman.isEmpty()) {
                 return allFreshman;
             }
         } catch (Exception e) {
             throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR,
                     " SOMETHING WENT WRONG " + e.getCause());
         }
+        throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " NO DATA FOUND ");
     }
 
     @Override
@@ -188,15 +186,14 @@ public class StudentImpl implements StudentService {
         List<Student> allSophomore = studentRepo.findByAcademicLevel("SOPHOMORE");
 
         try {
-            if (allSophomore.isEmpty()) {
-                throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " NO DATA FOUND ");
-            } else {
+            if (!allSophomore.isEmpty()) {
                 return allSophomore;
             }
         } catch (Exception e) {
             throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR,
                     " SOMETHING WENT WRONG " + e.getCause());
         }
+        throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " NO DATA FOUND ");
     }
 
     @Override
@@ -204,15 +201,14 @@ public class StudentImpl implements StudentService {
         List<Student> allJunior = studentRepo.findByAcademicLevel("JUNIOR");
 
         try {
-            if (allJunior.isEmpty()) {
-                throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " NO DATA FOUND ");
-            } else {
+            if (!allJunior.isEmpty()) {
                 return allJunior;
             }
         } catch (Exception e) {
             throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR,
                     " SOMETHING WENT WRONG " + e.getCause());
         }
+        throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " NO DATA FOUND ");
     }
 
     @Override
@@ -220,15 +216,29 @@ public class StudentImpl implements StudentService {
         List<Student> allSenior = studentRepo.findByAcademicLevel("SENIOR");
 
         try {
-            if (allSenior.isEmpty()) {
-                throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " NO DATA FOUND ");
-            } else {
+            if (!allSenior.isEmpty()) {
                 return allSenior;
             }
         } catch (Exception e) {
             throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR,
                     " SOMETHING WENT WRONG " + e.getCause());
         }
+        throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " NO DATA FOUND ");
+    }
+
+    @Override
+    public List<Student> queryIrregular() {
+
+        List<Student> allIrregular = studentRepo.findByAcademicLevel("IRREGULAR");
+        try {
+            if (!allIrregular.isEmpty()) {
+                return allIrregular;
+            }
+        } catch (Exception e) {
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    " SOMETHING WENT WRONG " + e.getCause());
+        }
+        throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " NO DATA FOUND ");
     }
 
     @Override
