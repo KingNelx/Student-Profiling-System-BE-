@@ -51,4 +51,6 @@ public interface StudentService {
 
     Long totalIrregular();
 
+    Long totalReturnee();
+
 }

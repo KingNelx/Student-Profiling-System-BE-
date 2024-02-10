@@ -162,4 +162,9 @@ public class ClerkController {
         return studentService.totalIrregular();
     }
 
+    @GetMapping("/student/academic-level/total-returnee")
+    public Long returneeCount() {
+        return studentService.totalReturnee();
+    }
+
 }

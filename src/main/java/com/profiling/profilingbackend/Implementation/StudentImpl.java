@@ -318,4 +318,14 @@ public class StudentImpl implements StudentService {
         }
     }
 
+    @Override
+    public Long totalReturnee() {
+        Long returneeCount = studentRepo.countByAcademicLevel("RETURNEE");
+        if (returneeCount.longValue() < 0) {
+            throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+        } else {
+            return returneeCount;
+        }
+    }
+
 }
