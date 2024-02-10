@@ -20,4 +20,5 @@ public interface StudentRepo extends MongoRepository<Student, String> {
     List<Student> findByGender(String gender);
 
     Long countByGender(String gender);
+    Long countByAcademicLevel(String academicLevel);
 }

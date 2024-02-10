@@ -268,4 +268,54 @@ public class StudentImpl implements StudentService {
         }
     }
 
+    @Override
+    public Long totalFreshman() {
+        Long freshmanCount = studentRepo.countByAcademicLevel("FRESHMAN");
+        if (freshmanCount.longValue() < 0) {
+            throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+        } else {
+            return freshmanCount;
+        }
+    }
+
+    @Override
+    public Long totalSophomore() {
+        Long sophomoreCount = studentRepo.countByAcademicLevel("SOPHOMORE");
+        if (sophomoreCount.longValue() < 0) {
+            throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+        } else {
+            return sophomoreCount;
+        }
+    }
+
+    @Override
+    public Long totalJunior() {
+        Long juniorCount = studentRepo.countByAcademicLevel("JUNIOR");
+        if (juniorCount.longValue() < 0) {
+            throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+        } else {
+            return juniorCount;
+        }
+    }
+
+    @Override
+    public Long totalSenior() {
+        Long seniorCount = studentRepo.countByAcademicLevel("SENIOR");
+        if (seniorCount.longValue() < 0) {
+            throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+        } else {
+            return seniorCount;
+        }
+    }
+
+    @Override
+    public Long totalIrregular() {
+        Long irregularCount = studentRepo.countByAcademicLevel("IRREGULAR");
+        if (irregularCount.longValue() < 0) {
+            throw new HttpClientErrorException(HttpStatus.NO_CONTENT);
+        } else {
+            return irregularCount;
+        }
+    }
+
 }

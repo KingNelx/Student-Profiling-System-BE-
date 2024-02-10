@@ -41,4 +41,14 @@ public interface StudentService {
 
     Long totalFemaleCount();
 
+    Long totalFreshman();
+
+    Long totalSophomore();
+
+    Long totalJunior();
+
+    Long totalSenior();
+
+    Long totalIrregular();
+
 }

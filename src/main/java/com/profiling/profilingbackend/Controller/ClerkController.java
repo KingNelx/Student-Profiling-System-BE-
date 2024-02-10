@@ -136,4 +136,30 @@ public class ClerkController {
     public Long femaleCount() {
         return studentService.totalFemaleCount();
     }
+
+    @GetMapping("/student/academic-level/total-freshman")
+    public Long freshmanCount() {
+        return studentService.totalFreshman();
+    }
+
+    @GetMapping("/student/academic-level/total-sophomore")
+    public Long sophomoreCount() {
+        return studentService.totalSophomore();
+    }
+
+    @GetMapping("/student/academic-level/total-junior")
+    public Long juniorCount() {
+        return studentService.totalJunior();
+    }
+
+    @GetMapping("/student/academic-level/total-senior")
+    public Long seniorCount() {
+        return studentService.totalSenior();
+    }
+
+    @GetMapping("/student/academic-level/total-irregular")
+    public Long irregularCount() {
+        return studentService.totalIrregular();
+    }
+
 }
