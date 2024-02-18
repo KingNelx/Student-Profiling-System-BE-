@@ -122,6 +122,11 @@ public class ClerkController {
         return studentService.queryIrregular();
     }
 
+    @GetMapping("/student/academic-level/returnee")
+    public List<Student> queryReturnee() {
+        return studentService.queryReturnee();
+    }
+
     @GetMapping("/student/total-enrolled")
     public Long Count() {
         return studentService.totalStudentCount();

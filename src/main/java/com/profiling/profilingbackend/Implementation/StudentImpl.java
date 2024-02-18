@@ -39,7 +39,7 @@ public class StudentImpl implements StudentService {
 
         try {
             if (doesFirstNameExist && doesLastNameExist && doesStudentIdExist) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(" DATA ALREADY EXIST ");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(" STUDENT ALREADY EXIST ");
             }
             List<Course> myCourse = student.getMyCourse();
             try {
@@ -241,6 +241,22 @@ public class StudentImpl implements StudentService {
         throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " NO DATA FOUND ");
     }
 
+    @Override
+    public List<Student> queryReturnee() {
+
+        List<Student> allReturnee = studentRepo.findByAcademicLevel("RETURNEE");
+        try {
+            if (!allReturnee.isEmpty()) {
+                return allReturnee;
+            }
+        } catch (Exception e) {
+            throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    " SOMETHING WENT WRONG " + e.getCause());
+        }
+        throw new HttpClientErrorException(HttpStatus.NO_CONTENT, " NO DATA FOUND ");
+    }
+
+    // queryReturnee
     @Override
     public Long totalStudentCount() {
         Long male = studentRepo.count();

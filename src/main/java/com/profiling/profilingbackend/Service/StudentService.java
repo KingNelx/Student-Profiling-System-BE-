@@ -35,6 +35,8 @@ public interface StudentService {
 
     List<Student> queryIrregular();
 
+    List <Student> queryReturnee();
+
     Long totalStudentCount();
 
     Long totalMaleCount();
