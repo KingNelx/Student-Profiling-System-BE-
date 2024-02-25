@@ -55,4 +55,5 @@ public class Student {
     @DBRef
     @ElementCollection
     private @Getter @Setter List<Course> myCourse;
+
 }
