@@ -48,7 +48,7 @@ public class Student {
 
     @Column(nullable = false)
     private @Getter @Setter String contactInformation;
-
+ 
     @Column(nullable = false)
     private @Getter @Setter String academicLevel;
 
