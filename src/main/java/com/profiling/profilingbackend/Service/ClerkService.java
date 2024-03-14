@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 @Service
 public interface ClerkService {
 
-    ResponseEntity<String> createAccount();
+    ResponseEntity<String> createAccount(Clerk newAccount);
 
     ResponseEntity<String> logInAsClerk(String firstName, String lastName, String emailAddress, String role,
             String userName, String password);
