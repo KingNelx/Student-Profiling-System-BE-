@@ -1,4 +1,4 @@
-package com.profiling.Implementation;
+package com.profiling.profilingbackend.Implementation;
 
 import org.springframework.stereotype.Service;
 
