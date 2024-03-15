@@ -1,8 +1,8 @@
 package com.profiling.profilingbackend.Implementation;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 
 import com.profiling.profilingbackend.Entity.Clerk;
@@ -46,9 +46,9 @@ public class ClerkImpl implements ClerkService {
     }
 
     @Override
-    public ResponseEntity<String> logInAsClerk(@PathVariable String firstName, @PathVariable String lastName,
-            @PathVariable String emailAddress, @PathVariable String role, @PathVariable String userName,
-            @PathVariable String password) {
+    public ResponseEntity<String> logInAsClerk(@RequestParam String firstName, @RequestParam String lastName,
+            @RequestParam String emailAddress, @RequestParam String role, @RequestParam String userName,
+            @RequestParam String password) {
 
         Clerk existingAccount = clerkRepo.findByFirstNameAndLastNameAndEmailAddressAndRoleAndUserNameAndPassword(
                 firstName, lastName, emailAddress, role, userName, password);
@@ -75,12 +75,7 @@ public class ClerkImpl implements ClerkService {
 
     @Override
     public Optional<Clerk> findClerkByID(Long id) {
-        if (clerkRepo.existsById(id)) {
-            throw new HttpClientErrorException(HttpStatus.CONFLICT);
-        }
-
         Optional<Clerk> existingID = clerkRepo.findById(id);
-
         try {
             if (!existingID.isPresent()) {
                 throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
